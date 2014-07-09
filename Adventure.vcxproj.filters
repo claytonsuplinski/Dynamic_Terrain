@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fundamentals">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Environments">
+      <UniqueIdentifier>{f05301f0-cfe3-4e58-9875-1721e3c128d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Organization">
+      <UniqueIdentifier>{6ece9c3b-cf3e-4a17-b372-a04e03ce7e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Elements">
+      <UniqueIdentifier>{da408ea4-b56c-415d-9563-2cd8ce87f91a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fundamentals\Shapes">
+      <UniqueIdentifier>{ee4c7077-126d-41a6-bf23-1ae0c8e1850f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fbo.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="object2.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="shader2.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_utils.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="texturedshader.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexattributes2.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexattributes.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="disc.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="cube.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="cube2.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="cube3.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="cylinder.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="cylinder2.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="gengar.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="impostor.h">
+      <Filter>Fundamentals</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Game Organization</Filter>
+    </ClInclude>
+    <ClInclude Include="precip.h">
+      <Filter>Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="snow.h">
+      <Filter>Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="square4.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere2.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="square2.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="square3.h">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="city.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="fbo.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="object2.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="shader2.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_utils.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="textureshader.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexattributes.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexattributes2.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="cube2.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="cube3.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="cylinder.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="cylinder2.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="disc.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="gengar.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="impostor.cpp">
+      <Filter>Fundamentals</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Game Organization</Filter>
+    </ClCompile>
+    <ClCompile Include="precip.cpp">
+      <Filter>Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="snow.cpp">
+      <Filter>Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="sphere.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="sphere2.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="square2.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="square3.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="square4.cpp">
+      <Filter>Fundamentals\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="city.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="basic_skybox_shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_texture_shader2.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_skybox_shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_texture_shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_texture_shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="jumbotronShader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="jumbotronShader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong2.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong3.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong3.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="text.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="text.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="buildingWithLights.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="buildingWithLights.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{999A82A4-1277-45A9-9A25-144BB48A87F9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Adventure</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Common Files\freeglut\include;C:\Program Files %28x86%29\Common Files\glm;C:\Program Files %28x86%29\Common Files\glew\glew-1.9.0\include;C:\Program Files %28x86%29\Common Files\FreeImage\Source;C:\Program Files %28x86%29\Common Files\ft2411\freetype-2.4.11\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype2411_D.lib;glew32.lib;FreeImage.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Common Files\ft2411\freetype-2.4.11\objs;C:\Program Files %28x86%29\Common Files\glew\glew-1.9.0\lib;C:\Program Files %28x86%29\Common Files\FreeImage\Source\FreeImageLib;C:\Program Files %28x86%29\Common Files\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="city.h" />
+    <ClInclude Include="cube.h" />
+    <ClInclude Include="cube2.h" />
+    <ClInclude Include="cube3.h" />
+    <ClInclude Include="cylinder.h" />
+    <ClInclude Include="cylinder2.h" />
+    <ClInclude Include="disc.h" />
+    <ClInclude Include="fbo.h" />
+    <ClInclude Include="gengar.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="impostor.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="object2.h" />
+    <ClInclude Include="precip.h" />
+    <ClInclude Include="shader.h" />
+    <ClInclude Include="shader2.h" />
+    <ClInclude Include="shader_utils.h" />
+    <ClInclude Include="snow.h" />
+    <ClInclude Include="sphere.h" />
+    <ClInclude Include="sphere2.h" />
+    <ClInclude Include="square2.h" />
+    <ClInclude Include="square3.h" />
+    <ClInclude Include="square4.h" />
+    <ClInclude Include="texturedshader.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="vertexattributes.h" />
+    <ClInclude Include="vertexattributes2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="city.cpp" />
+    <ClCompile Include="cube.cpp" />
+    <ClCompile Include="cube2.cpp" />
+    <ClCompile Include="cube3.cpp" />
+    <ClCompile Include="cylinder.cpp" />
+    <ClCompile Include="cylinder2.cpp" />
+    <ClCompile Include="disc.cpp" />
+    <ClCompile Include="fbo.cpp" />
+    <ClCompile Include="gengar.cpp" />
+    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="impostor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="object2.cpp" />
+    <ClCompile Include="precip.cpp" />
+    <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shader2.cpp" />
+    <ClCompile Include="shader_utils.cpp" />
+    <ClCompile Include="snow.cpp" />
+    <ClCompile Include="sphere.cpp" />
+    <ClCompile Include="sphere2.cpp" />
+    <ClCompile Include="square2.cpp" />
+    <ClCompile Include="square3.cpp" />
+    <ClCompile Include="square4.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="textureshader.cpp" />
+    <ClCompile Include="vertexattributes.cpp" />
+    <ClCompile Include="vertexattributes2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="basic_skybox_shader.frag" />
+    <None Include="basic_skybox_shader.vert" />
+    <None Include="basic_texture_shader.frag" />
+    <None Include="basic_texture_shader.vert" />
+    <None Include="basic_texture_shader2.frag" />
+    <None Include="jumbotronShader.frag" />
+    <None Include="jumbotronShader.vert" />
+    <None Include="phong.frag" />
+    <None Include="phong.vert" />
+    <None Include="phong2.frag" />
+    <None Include="phong3.frag" />
+    <None Include="phong3.vert" />
+    <None Include="text.frag" />
+    <None Include="text.vert" />
+    <None Include="buildingWithLights.frag" />
+    <None Include="buildingWithLights.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
