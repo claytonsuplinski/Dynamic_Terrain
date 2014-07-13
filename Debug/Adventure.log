@@ -1,58 +1,20 @@
-﻿Build started 7/8/2014 8:56:05 PM.
-     1>Project "c:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
+﻿Build started 7/13/2014 1:06:29 AM.
+     1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt city.cpp main.cpp
-         city.cpp
-         Generating Code...
-         Compiling...
-         main.cpp
-         Generating Code...
+         All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\objs" /LIBPATH:"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\lib" /LIBPATH:"C:\Program Files (x86)\Common Files\FreeImage\Source\FreeImageLib" /LIBPATH:"C:\Program Files (x86)\Common Files\freeglut\lib" freetype2411_D.lib glew32.lib FreeImage.lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Adventure.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"c:\users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.lib" /MACHINE:X86 Debug\Adventure.exe.embed.manifest.res
-         Debug\city.obj
-         Debug\cube.obj
-         Debug\cube2.obj
-         Debug\cube3.obj
-         Debug\cylinder.obj
-         Debug\cylinder2.obj
-         Debug\disc.obj
-         Debug\fbo.obj
-         Debug\gengar.obj
-         Debug\globals.obj
-         Debug\impostor.obj
-         Debug\main.obj
-         Debug\menu.obj
-         Debug\object.obj
-         Debug\object2.obj
-         Debug\precip.obj
-         Debug\shader.obj
-         Debug\shader2.obj
-         Debug\shader_utils.obj
-         Debug\snow.obj
-         Debug\sphere.obj
-         Debug\sphere2.obj
-         Debug\square2.obj
-         Debug\square3.obj
-         Debug\square4.obj
-         Debug\TextureManager.obj
-         Debug\textureshader.obj
-         Debug\vertexattributes.obj
-         Debug\vertexattributes2.obj
+         All outputs are up-to-date.
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Adventure.exe.embed.manifest" /manifest Debug\Adventure.exe.intermediate.manifest
          All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         Adventure.vcxproj -> c:\users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.exe
        FinalizeBuildStatus:
          Deleting file "Debug\Adventure.unsuccessfulbuild".
          Touching "Debug\Adventure.lastbuildstate".
-     1>Done Building Project "c:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.07
+Time Elapsed 00:00:00.19

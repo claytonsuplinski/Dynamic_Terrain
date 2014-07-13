@@ -67,6 +67,7 @@ void main()
 	else if(factor < 7.5){finalColor.z = ((factor - 5)/2.5)* finalColor.z;finalColor.x = 0;finalColor.y = (1 - ((factor - 5)/2.5))* finalColor.y;}
 	else if(factor < 10){finalColor.x = ((factor - 7.5)/2.5)* finalColor.x;finalColor.y = 0;finalColor.z = (1 - ((factor - 7.5)/2.5))* finalColor.z;}
 
+
 	finalColor = vec3(mix( fogColor, finalColor, fogFactor ));
 
 	FragColor = vec4(finalColor, color.a);

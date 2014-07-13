@@ -17,22 +17,18 @@ uniform ivec2 size;
 vec4 color = texture(picture, tc);
 float factor = 1.0f;
 
-vec3 ads(){
-return LightIntensity * ( Ka * vec3(color) );
-}
-
 void main(){
 
-	if(size.x > 0.5 || size.y > 0.5){
+	/*if(size.x > 0.5 || size.y > 0.5){
 		color = vec4(ads(), 1.0f);
-	}
+	}*/
 
 	float dist1 = abs( Position.z );
 	float fogFactor = (20.0f - dist1) /
 	(20.0f - 5.0f);
 	fogFactor = clamp( fogFactor, 0.0, 0.5 );
 	//Fog
-	if(size.y == 1){
+	/*if(size.y == 1){
 		FragColor = vec4(mix( vec3(0.1f, 0.1f, 0.1f), vec3(color), fogFactor ), 1.0);
 	}
 	else if(size.y == 2){
@@ -47,8 +43,8 @@ void main(){
 	else if(size.y == 5){
 		FragColor = vec4(mix( vec3(0.0f, 0.0f, 0.05f), vec3(color), fogFactor ), 1.0);
 	}
-	else{
+	else{*/
 		FragColor = color;
-	}
+	//}
 }
 

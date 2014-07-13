@@ -28,6 +28,15 @@ Project: First-Person Shooter
 using namespace std;
 using namespace glm;
 
+#include <iostream>
+#include <list>
+
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/polygon.hpp>
+
+#include <boost/geometry/io/wkt/wkt.hpp>
+
 //The projection and modelview matrices. 
 mat4 projection, modelview;
 
@@ -372,13 +381,11 @@ void SpecialFunc(int c, int x, int y)
 
 void makeSkybox(){
 	modelview = endRender(modelview);
-	modelview = rotate(modelview, (GLfloat) RotatedX, vec3(1,0,0));
-	modelview = rotate(modelview, (GLfloat) RotatedY, vec3(0,1,0));
-	modelview = scale(modelview, vec3(2,2,2));
-	skybox.Draw(projection, modelview, tod, current_timeDisplay/2);	
-	modelview = scale(modelview, vec3(0.5,0.5,0.5));
-	modelview = rotate(modelview, (GLfloat) -RotatedY, vec3(0,1,0));
-	modelview = rotate(modelview, (GLfloat) -RotatedX, vec3(1,0,0));
+	mat4 skyboxScale = modelview;
+	skyboxScale = rotate(skyboxScale, (GLfloat) RotatedX, vec3(1,0,0));
+	skyboxScale = rotate(skyboxScale, (GLfloat) RotatedY, vec3(0,1,0));
+	skyboxScale = scale(skyboxScale, vec3(3,3,3));
+	skybox.Draw(projection, skyboxScale, tod, current_timeDisplay/2);	
 	modelview = render(modelview);
 }
 
@@ -415,13 +422,7 @@ void keyPress(){
 		if(velocity2 < maxUserVelocity){velocity2 += 0.1f;}
 		if(movingWRTSnow < 1){movingWRTSnow = movingWRTSnow + 0.2f;}
 		transZ = (float)(transZ + velocity2*cos(-RotatedY*3.14/180));
-		if(abs(transZ) > 500.0f){
-			transZ = (float)(transZ - velocity2*cos(-RotatedY*3.14/180));
-		}
 		transX = (float)(transX + velocity2*sin(-RotatedY*3.14/180));			
-		if(abs(transX) > 500.0f){
-			transX = (float)(transX - velocity2*sin(-RotatedY*3.14/180));
-		}
 	}
 	else{
 		if(velocity2 > 0){velocity2 -= 0.1f;}
@@ -439,16 +440,15 @@ void keyPress(){
 
 //Set up the environment for game play after selected in the menu
 void initArena(){
-	cout << "init city" << endl;
 	city.Initialize();
 }
 
 //Orchestrates all the objects and variables into a playable game
 void GameDisplay(){
 	glEnable(GL_CULL_FACE);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.486f, 0.596f, 0.737f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	projection = perspective(25.0f, window.window_aspect, 0.01f, 2000.0f);
+	projection = perspective(25.0f, window.window_aspect, 0.01f, 5000.0f);
 	modelview = lookAt(lookAtEye, lookAtCenter, vec3(0.0f, 1.0f, 0.0f));
 	modelview = render(modelview);
 	glLoadMatrixf(value_ptr(modelview));
@@ -495,7 +495,7 @@ void GameDisplay(){
 		//Mouse movement
 		mouseRotations(1, viewPerspective);		
 
-		makeSkybox();
+		//makeSkybox();
 
 		modelview = endRender(modelview);
 
