@@ -107,6 +107,9 @@
     <ClInclude Include="city.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="building.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -194,6 +197,9 @@
     <ClCompile Include="city.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
+    <ClCompile Include="building.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="basic_skybox_shader.frag">
@@ -242,6 +248,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="buildingWithLights.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_texture_shader_ocean.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

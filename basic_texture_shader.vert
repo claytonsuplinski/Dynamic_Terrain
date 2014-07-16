@@ -17,6 +17,7 @@ uniform float time;
 out vec3 Position;
 out vec3 Normal;
 out vec2 tc;
+out vec3 vertPos;
 
 void main()
 {
@@ -25,4 +26,5 @@ void main()
 	tc = texture_coordinates;
 	vec3 pos = vertex_position;
 	gl_Position = mvp * vec4(pos, 1.0);
+	vertPos = vertex_position;
 }

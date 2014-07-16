@@ -288,13 +288,12 @@ void KeyboardFunc(unsigned char c, int x, int y){
 		case 's':sPressed = true;break;
 		case 'a':aPressed = true;break;
 		case 'd':dPressed = true;break;
-		case 'k': 
-			break;
-		case 'n': //Reset back to main menu
+		
+		/*case 'n': //Reset back to main menu
 			if(!menu.menuOn){
 				reset();
 			}
-			break;
+			break;*/
 
 		case 'p': // Pause/unpause
 			if(!menu.menuOn){
@@ -309,16 +308,47 @@ void KeyboardFunc(unsigned char c, int x, int y){
 			break;
 
 		case 'i':  //Toggles wireframe mode
-			window.wireframe = !window.wireframe;
+			//window.wireframe = !window.wireframe;
+			//+z
+			break;
+		case 'j':
+			//+x
+			break;
+		case 'k':
+			//-z
+			break;
+		case 'l':
+			//-x
+			break;
+		case 'u':
+			//+y
+			break;
+		case 'n':
+			//-y
+			break;
+		case 'h':
+			city.currBuilding++;
+			city.currBuilding%=city.building->buildings.size();
+			break;
+		case 'g':
+			city.currBuilding--;
+			if(city.currBuilding < 0){city.currBuilding=city.building->buildings.size()-1;}
 			break;
 
-		case 'c': 			
+		case 'c': 
+			city.cityBlocksBuildings.pop_back();
+			city.cityBlocksBuildingsPositions.pop_back();
+			city.cityBlocksBuildingsRotations.pop_back();
 			break;
 
 		case 'v': 
+			city.cityBlocksBuildings.push_back(city.currBuilding);
+			city.cityBlocksBuildingsPositions.push_back(city.currBuildingPosition);
+			city.cityBlocksBuildingsRotations.push_back(city.currBuildingRotation);
 			break;
 
 		case 'x': 
+			city.saveBuildingVertices();
 			break;
 
 		case '1': 	
@@ -448,7 +478,7 @@ void GameDisplay(){
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.486f, 0.596f, 0.737f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	projection = perspective(25.0f, window.window_aspect, 0.01f, 5000.0f);
+	projection = perspective(25.0f, window.window_aspect, 0.01f, 7000.0f);
 	modelview = lookAt(lookAtEye, lookAtCenter, vec3(0.0f, 1.0f, 0.0f));
 	modelview = render(modelview);
 	glLoadMatrixf(value_ptr(modelview));
@@ -508,7 +538,7 @@ void GameDisplay(){
 
 //		gm1.DrawTeams(projection, modelview, tod, 0);
 
-		city.Draw(projection, modelview, tod, 0);
+		city.Draw(projection, modelview, tod, current_timeDisplay);
 		
 		glDepthMask(GL_FALSE);
 		drawPrecipitationWithRadar();

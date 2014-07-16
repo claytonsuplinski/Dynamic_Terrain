@@ -16,9 +16,14 @@ bool City::Initialize()
 
 	Gengar * tmpGengar;
 
+	currBuilding = 0;
+
+	building = new Building();
+	building->Initialize();
+
 	water = new Gengar();
 	water->order = 1;
-	water->Initialize("./models/water.obj", "./textures/water.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	water->Initialize("./models/water.obj", "./textures/water.png", "basic_texture_shader.vert", "basic_texture_shader_ocean.frag");
 
 	Gengar * beachCorner = new Gengar();
 	beachCorner->order = 1;
@@ -169,7 +174,22 @@ char *chars = reinterpret_cast<char*>(&myInt);
 
 void City::TakeDown(){super::TakeDown();}
 
-void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, const float rotY){
+void City::saveBuildingVertices(){
+	ofstream outputFile;
+outputFile.open("buildingPositions.txt");
+
+for(int i=0; i<cityBlocksBuildings.size(); i++){
+	outputFile << "cityBlocksBuildings.push_back(" << cityBlocksBuildings.at(i) 
+		<< ");cityBlocksBuildingsPositions.push_back(" << cityBlocksBuildingsPositions.at(i).x << ", " << cityBlocksBuildingsPositions.at(i).y << ", "
+		<< cityBlocksBuildingsPositions.at(i).z
+		<< ");cityBlocksBuildingsRotations.push_back(" << cityBlocksBuildingsRotations.at(i) << ");" << endl;
+}
+
+outputFile.close();
+}
+
+
+void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, const float time){
 
 	if (this->GLReturnedError("City ::Draw - on entry")){
 		return;	
@@ -201,13 +221,59 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 	mat4 waterMatrix = modelview;
 	waterMatrix = translate(modelview, vec3(-5000,0,-5000));
-	water->Draw(projection, waterMatrix, size, 0);
+	water->Draw(projection, waterMatrix, size, time);
 	waterMatrix = translate(modelview, vec3(5000,0,-5000));
-	water->Draw(projection, waterMatrix, size, 0);
+	water->Draw(projection, waterMatrix, size, time);
 	waterMatrix = translate(modelview, vec3(-5000,0,5000));
-	water->Draw(projection, waterMatrix, size, 0);
+	water->Draw(projection, waterMatrix, size, time);
 	waterMatrix = translate(modelview, vec3(waterWidthOffset+5000,0,5000));
-	water->Draw(projection, waterMatrix, size, 0);
+	water->Draw(projection, waterMatrix, size, time);
+
+	mat4 buildingMatrix = modelview;
+	for(int i=0; i<cityBlocksBuildings.size(); i++){
+		buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+		buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+		building->buildingIndex = cityBlocksBuildings.at(i);
+		building->Draw(projection, buildingMatrix, size, 0);
+	}
+
+	buildingMatrix = translate(modelview, currBuildingPosition);
+	buildingMatrix = rotate(buildingMatrix, currBuildingRotation, vec3(0,1,0));
+	building->buildingIndex = currBuilding;
+	building->Draw(projection, buildingMatrix, size, 0);
+	
+	/*
+	mat4 buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(500, 0, 500));
+	building->buildingIndex=4;
+	building->Draw(projection, buildingMatrix, size, 0);
+
+	buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(6500, 0, 500));
+	building->buildingIndex=0;
+	building->Draw(projection, buildingMatrix, size, 0);
+
+	buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(6500 + 126/2 + 1074/2, 0, 500));
+	building->buildingIndex=1;
+	building->Draw(projection, buildingMatrix, size, 0);
+
+	buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(6500 + 126/2 + 1.5*1074, 0, 500));
+	building->buildingIndex=1;
+	building->Draw(projection, buildingMatrix, size, 0);
+
+	buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(6500 + 126/2 + 2.5*1074, 0, 500));
+	building->buildingIndex=1;
+	building->Draw(projection, buildingMatrix, size, 0);
+
+	buildingMatrix = modelview;
+	buildingMatrix = translate(buildingMatrix, vec3(6500 + 126/2 + 3.5*1074, 0, 500));
+	building->buildingIndex=1;
+	building->Draw(projection, buildingMatrix, size, 0);
+	*/
+	
 
 	if (this->GLReturnedError("City::Draw - on exit")){
 		return;

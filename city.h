@@ -7,6 +7,8 @@ Project: First-Person Shooter
 #include "object.h"
 #include "shader.h"
 #include "gengar.h"
+#include "building.h"
+#include <fstream>
 
 using namespace std;
 using namespace glm;
@@ -18,6 +20,7 @@ public:
 	~City();
 	virtual bool Initialize();
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
+	void saveBuildingVertices();
 	void TakeDown();
 
 	Gengar * water;
@@ -32,8 +35,17 @@ public:
 		float length; //North-south - z
 	};
 
+	Building * building;
 	vector<Gengar*> cityBlocks;
-	vector<Gengar*> cityBlocksBuildings;
+
+	vector<int> cityBlocksBuildings;
+	vector<vec3> cityBlocksBuildingsPositions;
+	vector<float> cityBlocksBuildingsRotations;
+
+	int currBuilding;
+	vec3 currBuildingPosition;
+	float currBuildingRotation;
+
 	vector<blockDimensions> cityBlocksDimensions; //Dimensions of each block
 	vector<float> cityBlocksRotations;
 	static const int cityLength = 10;

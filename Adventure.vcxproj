@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="building.h" />
     <ClInclude Include="city.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="cube2.h" />
@@ -107,6 +108,7 @@
     <ClInclude Include="vertexattributes2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="building.cpp" />
     <ClCompile Include="city.cpp" />
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="cube2.cpp" />
@@ -143,6 +145,7 @@
     <None Include="basic_texture_shader.frag" />
     <None Include="basic_texture_shader.vert" />
     <None Include="basic_texture_shader2.frag" />
+    <None Include="basic_texture_shader_ocean.frag" />
     <None Include="jumbotronShader.frag" />
     <None Include="jumbotronShader.vert" />
     <None Include="phong.frag" />
