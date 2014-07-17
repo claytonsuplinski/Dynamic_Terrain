@@ -17,9 +17,14 @@ bool City::Initialize()
 	Gengar * tmpGengar;
 
 	currBuilding = 0;
+	currBuildingPosition = vec3(0,0.5,0);
 
 	building = new Building();
 	building->Initialize();
+
+	buildingsInitialized = false;
+
+	loadBuildings();
 
 	water = new Gengar();
 	water->order = 1;
@@ -70,23 +75,32 @@ char *chars = reinterpret_cast<char*>(&myInt);
 
 	string filePath = "./models/";
 	
+	blockDimensions tmpDim;
 	for(int i=0; i<cityLength; i++){
 		for(int j=0; j<cityWidth; j++){
 			if(i==0 && j==0){
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(beachCorner);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==0 && (j>0 && j<7)){
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(beachHorizontal);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==0 && j==7){
 				cityBlocksRotations.push_back(-90.f);
 				cityBlocks.push_back(beachCornerBridge);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==1 && j==7){
 				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(beachVerticalBridge);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i>0 && (j==0 || j==7)){
 				if(j==7){
@@ -96,34 +110,50 @@ char *chars = reinterpret_cast<char*>(&myInt);
 					cityBlocksRotations.push_back(0.f);
 				}
 				cityBlocks.push_back(beachVertical);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==1 && (j==2 || j==5)){
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block2L);
+				tmpDim.ul = vec2(-519,126);tmpDim.dl = vec2(-519, -126);tmpDim.ur = vec2(537, 126);tmpDim.dr = vec2(537, -126);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==1 && (j==3 || j==6)){
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block2R);
+				tmpDim.ul = vec2(-537,126);tmpDim.dl = vec2(-537, -126);tmpDim.ur = vec2(519, 126);tmpDim.dr = vec2(519, -126);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==7 && j==4){
+			else if(i==7 && j==4){ //Return to this later
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block4);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==8 && j==5){
+			else if(i==8 && j==5){ //Return to this later
 				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(block4);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==7 && j==5){
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block4Right);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==8 && j==4){
 				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(block4Right);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else{
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block1);
+				tmpDim.ul = vec2(-519,126);tmpDim.dl = vec2(-519,-126);tmpDim.ur = vec2(519,126);tmpDim.dr = vec2(519,-126);
+				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			/*else{
 			tmpGengar = new Gengar();
@@ -180,9 +210,9 @@ outputFile.open("buildingPositions.txt");
 
 for(int i=0; i<cityBlocksBuildings.size(); i++){
 	outputFile << "cityBlocksBuildings.push_back(" << cityBlocksBuildings.at(i) 
-		<< ");cityBlocksBuildingsPositions.push_back(" << cityBlocksBuildingsPositions.at(i).x << ", " << cityBlocksBuildingsPositions.at(i).y << ", "
+		<< ");cityBlocksBuildingsPositions.push_back(vec3(" << cityBlocksBuildingsPositions.at(i).x << ", " << cityBlocksBuildingsPositions.at(i).y << ", "
 		<< cityBlocksBuildingsPositions.at(i).z
-		<< ");cityBlocksBuildingsRotations.push_back(" << cityBlocksBuildingsRotations.at(i) << ");" << endl;
+		<< "));cityBlocksBuildingsRotations.push_back(" << cityBlocksBuildingsRotations.at(i) << ");" << endl;
 }
 
 outputFile.close();
@@ -208,16 +238,161 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 			another = translate(modelview, vec3(widthOffset, 0, lengthOffset));
 
+			if(!buildingsInitialized){
+				if(cityBlocksDimensions2.at(i*cityWidth + j).dl.x != 0){
+
+					float topOffsetLeft = 0;
+					float topOffsetRight = 0;
+					float bottomOffsetLeft = 0;
+					float bottomOffsetRight = 0;
+					float leftOffsetTop = 0;
+					float leftOffsetBottom = 0;
+					float rightOffsetTop = 0;
+					float rightOffsetBottom = 0;
+
+					int randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+
+					cityBlocksBuildings.push_back(randomizedBuilding);
+					cityBlocksBuildingsPositions.push_back(
+						vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ul.x + building->dimensions.at(randomizedBuilding).x/2,
+						0,
+						lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ul.y - building->dimensions.at(randomizedBuilding).z/2));
+					cityBlocksBuildingsRotations.push_back(0);
+					topOffsetRight = building->dimensions.at(randomizedBuilding).x;
+					rightOffsetTop = building->dimensions.at(randomizedBuilding).z;
+
+					randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+					cityBlocksBuildings.push_back(randomizedBuilding);
+					cityBlocksBuildingsPositions.push_back(
+						vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ur.x - building->dimensions.at(randomizedBuilding).x/2,
+						0,
+						lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ur.y - building->dimensions.at(randomizedBuilding).z/2));
+					cityBlocksBuildingsRotations.push_back(0);
+					topOffsetLeft = building->dimensions.at(randomizedBuilding).x;
+					leftOffsetTop = building->dimensions.at(randomizedBuilding).z;
+
+					randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+					cityBlocksBuildings.push_back(randomizedBuilding);
+					cityBlocksBuildingsPositions.push_back(
+						vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).x/2,
+						0,
+						lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).z/2));
+					cityBlocksBuildingsRotations.push_back(180);
+					bottomOffsetRight = building->dimensions.at(randomizedBuilding).x;
+					rightOffsetBottom = building->dimensions.at(randomizedBuilding).z;
+
+					randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+					cityBlocksBuildings.push_back(randomizedBuilding);
+					cityBlocksBuildingsPositions.push_back(
+						vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dr.x - building->dimensions.at(randomizedBuilding).x/2,
+						0,
+						lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dr.y + building->dimensions.at(randomizedBuilding).z/2));
+					cityBlocksBuildingsRotations.push_back(180);
+					bottomOffsetLeft = building->dimensions.at(randomizedBuilding).x;
+					leftOffsetBottom = building->dimensions.at(randomizedBuilding).z;
+
+					//Make sure the corners can never be landmarks
+					//Place landmarks in the center of the block and place everything else around it
+							//Determine if there will be a landmark before placing any other buildings
+							//Place the landmark and use its width and length as boundaries
+							//Place buildings all around it
+
+					/////////Non-landmark case////////
+					////Top//// (fixed + z; go from +x to -x)
+					bool buildingFits = true;
+					while(buildingFits){
+						randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						if(cityBlocksDimensions2.at(i*cityWidth + j).ul.x + building->dimensions.at(randomizedBuilding).x + topOffsetLeft < cityBlocksDimensions2.at(i*cityWidth + j).ur.x - topOffsetRight){
+							cityBlocksBuildings.push_back(randomizedBuilding);
+							cityBlocksBuildingsPositions.push_back(
+								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ul.x + building->dimensions.at(randomizedBuilding).x/2 + topOffsetLeft,
+								0,
+								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ul.y - building->dimensions.at(randomizedBuilding).z/2));
+							cityBlocksBuildingsRotations.push_back(0);
+							topOffsetLeft += building->dimensions.at(randomizedBuilding).x;
+						}
+						else{
+							buildingFits = false;
+						}
+					}
+					
+
+					////Bottom////  (fixed - z; go from +x to -x)
+					buildingFits = true;
+					while(buildingFits){
+						randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						if(cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).x + bottomOffsetLeft < cityBlocksDimensions2.at(i*cityWidth + j).dr.x - bottomOffsetRight){
+							cityBlocksBuildings.push_back(randomizedBuilding);
+							cityBlocksBuildingsPositions.push_back(
+								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).x/2 + bottomOffsetLeft,
+								0,
+								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).z/2));
+							cityBlocksBuildingsRotations.push_back(180);
+							bottomOffsetLeft += building->dimensions.at(randomizedBuilding).x;
+						}
+						else{
+							buildingFits = false;
+						}
+					}
+					
+
+					////Left////  (fixed + x; go from +z to -z)
+					buildingFits = true;
+					while(buildingFits){
+						randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						if(cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).x + leftOffsetBottom < cityBlocksDimensions2.at(i*cityWidth + j).ul.y - leftOffsetTop){
+							cityBlocksBuildings.push_back(randomizedBuilding);
+							cityBlocksBuildingsPositions.push_back(
+								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).z/2,
+								0,
+								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).x/2 + leftOffsetBottom));
+							cityBlocksBuildingsRotations.push_back(90);
+							leftOffsetBottom += building->dimensions.at(randomizedBuilding).x;
+						}
+						else{
+							buildingFits = false;
+						}
+					}
+
+					
+
+					////Right//// (fixed - x; go from +z to -z)
+					/*buildingFits = true;
+					while(buildingFits){
+						randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						if(cityBlocksDimensions2.at(i*cityWidth + j).dr.y + building->dimensions.at(randomizedBuilding).x + rightOffsetBottom < cityBlocksDimensions2.at(i*cityWidth + j).ur.y - rightOffsetTop){
+							cityBlocksBuildings.push_back(randomizedBuilding);
+							cityBlocksBuildingsPositions.push_back(
+								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ur.x + building->dimensions.at(randomizedBuilding).z/2,
+								0,
+								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).ur.y + building->dimensions.at(randomizedBuilding).x/2 + rightOffsetBottom));
+							cityBlocksBuildingsRotations.push_back(270);
+							rightOffsetBottom += building->dimensions.at(randomizedBuilding).x;
+						}
+						else{
+							buildingFits = false;
+						}
+					}*/
+
+
+					
+				}
+			}
+
 			lengthOffset -= this->cityBlocksDimensions.at(i*cityWidth + j).length/2;
 			widthOffset += this->cityBlocksDimensions.at(i*cityWidth + j).width/2;
 
 			another = rotate(another, cityBlocksRotations.at(i*cityWidth + j), vec3(0,1,0));
 			cityBlocks.at(i*cityWidth + j)->Draw(projection, another, size, 0);
+
+			
 		}
 		waterWidthOffset = widthOffset;
 		widthOffset = 0;
 		lengthOffset += this->cityBlocksDimensions.at(i*cityWidth).length;
 	}
+
+	buildingsInitialized = true;
 
 	mat4 waterMatrix = modelview;
 	waterMatrix = translate(modelview, vec3(-5000,0,-5000));
@@ -231,10 +406,16 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 	mat4 buildingMatrix = modelview;
 	for(int i=0; i<cityBlocksBuildings.size(); i++){
-		buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
-		buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
-		building->buildingIndex = cityBlocksBuildings.at(i);
-		building->Draw(projection, buildingMatrix, size, 0);
+	//	if((abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 3000 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 200)
+	//		|| (abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 200 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 3000)){
+		if(buildingInFront(i, 5000, 0) || buildingInFront(i, 5000, 15) || buildingInFront(i, 5000, -15)
+			|| buildingInFront(i, 5000, 5) || buildingInFront(i, 5000, -5)
+			|| buildingInFront(i, 5000, 10) || buildingInFront(i, 5000, -10)){
+			buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+			buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+			building->buildingIndex = cityBlocksBuildings.at(i);
+			building->Draw(projection, buildingMatrix, size, 0);
+		}
 	}
 
 	buildingMatrix = translate(modelview, currBuildingPosition);
@@ -278,4 +459,47 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 	if (this->GLReturnedError("City::Draw - on exit")){
 		return;
 	}
+}
+
+
+bool City::buildingInFront(int buildingIndex, float distance, float angleOffset){
+	float tmpRot = (userRotation+270 + angleOffset)*0.0174;
+	float tmpSin = userPosition.z+distance*sin(tmpRot);
+	float tmpCos = userPosition.x+distance*cos(tmpRot);
+	float halfDimX = 3*building->dimensions.at(cityBlocksBuildings.at(buildingIndex)).x;
+	float halfDimZ = 3*building->dimensions.at(cityBlocksBuildings.at(buildingIndex)).z;
+	if(linesIntersect(vec2(userPosition.x, userPosition.z), vec2(tmpCos, tmpSin),
+		vec2(cityBlocksBuildingsPositions.at(buildingIndex).x+halfDimX, cityBlocksBuildingsPositions.at(buildingIndex).z+halfDimZ), 
+		vec2(cityBlocksBuildingsPositions.at(buildingIndex).x-halfDimX, cityBlocksBuildingsPositions.at(buildingIndex).z-halfDimZ))
+		||
+		linesIntersect(vec2(userPosition.x, userPosition.z), vec2(tmpCos, tmpSin),
+		vec2(cityBlocksBuildingsPositions.at(buildingIndex).x-halfDimX, cityBlocksBuildingsPositions.at(buildingIndex).z+halfDimZ), 
+		vec2(cityBlocksBuildingsPositions.at(buildingIndex).x+halfDimX, cityBlocksBuildingsPositions.at(buildingIndex).z-halfDimZ))){
+			return true;
+	}
+	return false;
+}
+
+bool CCW(vec2 C, vec2 W1, vec2 W2){
+	vec2 ab = W1-C;
+	vec2 ac = W2-C;
+	double y = (ab.x * ac.y) - (ab.y * ac.x);
+
+    // dot product
+    double x = (ab.x * ab.y) + (ac.x * ac.y);
+
+	return atan2(y, x) > 0;
+}
+
+bool City::linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2){
+	return (CCW(a1, b1, b2) != CCW(a2, b1, b2)) && (CCW(b1, a1, a2) != CCW(b2, a1, a2));
+}
+
+
+void City::loadBuildings(){
+cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6657, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7257, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8331, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9405, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10479, 0, 138));cityBlocksBuildingsRotations.push_back(0);
 }

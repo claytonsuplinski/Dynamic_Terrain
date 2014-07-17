@@ -25,6 +25,7 @@ public:
 	};
 
 	vector<Gengar*> buildings;
+	vector<vec3> dimensions;
 
 	int buildingIndex;
 

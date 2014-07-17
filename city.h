@@ -22,6 +22,10 @@ public:
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
 	void saveBuildingVertices();
 	void TakeDown();
+	void loadBuildings();
+
+	bool buildingInFront(int buildingIndex, float distance, float angleOffset);
+	bool linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2);
 
 	Gengar * water;
 
@@ -46,7 +50,10 @@ public:
 	vec3 currBuildingPosition;
 	float currBuildingRotation;
 
+	bool buildingsInitialized;
+
 	vector<blockDimensions> cityBlocksDimensions; //Dimensions of each block
+	vector<blockDimensions> cityBlocksDimensions2;
 	vector<float> cityBlocksRotations;
 	static const int cityLength = 10;
 	static const int cityWidth = 8;
@@ -55,6 +62,8 @@ public:
 	int currBlock; //Index of the current block the user is in
 	
 	vector<vector<xzBoundary>> cityBlocksBoundaries; //will need to use boost to check these
+
+	vec3 userPosition;float userRotation;
 
 	bool inWater;
 

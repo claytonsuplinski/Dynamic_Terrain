@@ -281,7 +281,7 @@ void KeyboardFunc(unsigned char c, int x, int y){
 
 	switch (c){
 		case 'e':ePressed = true;break;
-		case 'r':rPressed = true;break;
+		//case 'r':rPressed = true;break;
 		case 'z':zPressed = true;break;
 		case 'q':qPressed = true;break;
 		case 'w':wPressed = true;break;
@@ -307,24 +307,53 @@ void KeyboardFunc(unsigned char c, int x, int y){
 			}
 			break;
 
+		case 'r':
+			city.currBuildingRotation+=90;
+			if(city.currBuildingRotation >= 360){
+				city.currBuildingRotation = 0;
+			}
+			break;
 		case 'i':  //Toggles wireframe mode
 			//window.wireframe = !window.wireframe;
 			//+z
+			city.currBuildingPosition.z++;
 			break;
 		case 'j':
 			//+x
+			city.currBuildingPosition.x++;
 			break;
 		case 'k':
 			//-z
+			city.currBuildingPosition.z--;
 			break;
 		case 'l':
 			//-x
+			city.currBuildingPosition.x--;
+			break;
+		case '8':  //Toggles wireframe mode
+			//window.wireframe = !window.wireframe;
+			//+z
+			city.currBuildingPosition.z+=6;
+			break;
+		case '4':
+			//+x
+			city.currBuildingPosition.x+=6;
+			break;
+		case '5':
+			//-z
+			city.currBuildingPosition.z-=6;
+			break;
+		case '6':
+			//-x
+			city.currBuildingPosition.x-=6;
 			break;
 		case 'u':
 			//+y
+			city.currBuildingPosition.y+=0.5;
 			break;
 		case 'n':
 			//-y
+			city.currBuildingPosition.y-=0.5;
 			break;
 		case 'h':
 			city.currBuilding++;
@@ -360,12 +389,12 @@ void KeyboardFunc(unsigned char c, int x, int y){
 		case '3':
 			if(menu.menuOn){menu.Update(3);}
 			return;
-		case '4':
+		/*case '4':
 			if(menu.menuOn){menu.Update(4);}
 			return;
 		case '5':
 			if(menu.menuOn){menu.Update(5);}
-			return;
+			return;*/
 
 		case 13: //Enter key
 			return;
@@ -538,6 +567,8 @@ void GameDisplay(){
 
 //		gm1.DrawTeams(projection, modelview, tod, 0);
 
+		city.userPosition = vec3(-transX, transY, -transZ);
+		city.userRotation = RotatedY;
 		city.Draw(projection, modelview, tod, current_timeDisplay);
 		
 		glDepthMask(GL_FALSE);

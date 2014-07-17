@@ -1,2 +1,5 @@
-cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(0, 0, 0);cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(7);cityBlocksBuildingsPositions.push_back(0, 0, 0);cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6657, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7257, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8331, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9405, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10479, 0, 138));cityBlocksBuildingsRotations.push_back(0);
