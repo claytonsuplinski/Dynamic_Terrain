@@ -24,7 +24,7 @@ public:
 	void TakeDown();
 	void loadBuildings();
 
-	bool buildingInFront(int buildingIndex, float distance, float angleOffset);
+	bool buildingInFront(int buildingIndex, float distance, float angleOffset, float buffer);
 	bool linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2);
 
 	Gengar * water;
@@ -55,8 +55,8 @@ public:
 	vector<blockDimensions> cityBlocksDimensions; //Dimensions of each block
 	vector<blockDimensions> cityBlocksDimensions2;
 	vector<float> cityBlocksRotations;
-	static const int cityLength = 10;
-	static const int cityWidth = 8;
+	static const int cityLength = 33; //North-south
+	static const int cityWidth = 8; //East-west
 
 	vector<vector<int>> blocksToDraw; //An array of arrays of indices for blocks to draw while in a certain block
 	int currBlock; //Index of the current block the user is in
