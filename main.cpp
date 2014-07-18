@@ -20,6 +20,7 @@ Project: First-Person Shooter
 #include "precip.h"
 #include "cylinder.h"
 #include "city.h"
+#include "sky.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,6 +73,7 @@ Cylinder healthBar;
 Precip precip;
 Cube2 skybox;Menu menu;
 City city;
+Sky sky;
 
 bool stadiumLoaded = false;
 
@@ -268,6 +270,8 @@ void CloseFunc(){
 	window.window_handle = -1;
 	healthBar.TakeDown();
 	skybox.TakeDown();
+	sky.TakeDown();
+	city.TakeDown();
 }
 
 //Maintains aspect ratio when window is resized.
@@ -499,7 +503,8 @@ void keyPress(){
 
 //Set up the environment for game play after selected in the menu
 void initArena(){
-	city.Initialize();
+	sky.Initialize();
+	city.Initialize();	
 }
 
 //Orchestrates all the objects and variables into a playable game
@@ -566,6 +571,9 @@ void GameDisplay(){
 		modelview = render(modelview);
 
 //		gm1.DrawTeams(projection, modelview, tod, 0);
+
+		sky.userPosition = vec3(-transX, transY, -transZ);
+		sky.Draw(projection, modelview, tod, current_timeDisplay);
 
 		city.userPosition = vec3(-transX, transY, -transZ);
 		city.userRotation = RotatedY;

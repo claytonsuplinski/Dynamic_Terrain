@@ -110,6 +110,9 @@
     <ClInclude Include="building.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="sky.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -198,6 +201,9 @@
       <Filter>Environments</Filter>
     </ClCompile>
     <ClCompile Include="building.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="sky.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>

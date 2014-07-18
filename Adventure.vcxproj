@@ -96,6 +96,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="shader2.h" />
     <ClInclude Include="shader_utils.h" />
+    <ClInclude Include="sky.h" />
     <ClInclude Include="snow.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="sphere2.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shader2.cpp" />
     <ClCompile Include="shader_utils.cpp" />
+    <ClCompile Include="sky.cpp" />
     <ClCompile Include="snow.cpp" />
     <ClCompile Include="sphere.cpp" />
     <ClCompile Include="sphere2.cpp" />

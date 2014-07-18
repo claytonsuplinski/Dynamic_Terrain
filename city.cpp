@@ -318,8 +318,14 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 					////Bottom////  (fixed - z; go from +x to -x)
 					buildingFits = true;
+					bool tryLandmark = true;
 					while(buildingFits){
-						randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						if(tryLandmark){
+							randomizedBuilding = rand() % (building->dimensions.size()-2) + 2;
+						}
+						else{
+							randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
+						}
 						if(cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).x + bottomOffsetLeft < cityBlocksDimensions2.at(i*cityWidth + j).dr.x - bottomOffsetRight){
 							cityBlocksBuildings.push_back(randomizedBuilding);
 							cityBlocksBuildingsPositions.push_back(
@@ -328,9 +334,13 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).z/2));
 							cityBlocksBuildingsRotations.push_back(180);
 							bottomOffsetLeft += building->dimensions.at(randomizedBuilding).x;
+							tryLandmark = false;
+						}
+						else if(!tryLandmark){
+							buildingFits = false;
 						}
 						else{
-							buildingFits = false;
+							tryLandmark = false;
 						}
 					}					
 

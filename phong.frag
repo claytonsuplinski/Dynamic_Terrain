@@ -54,6 +54,6 @@ void main() {
 		fogColor = vec3(0.0f, 0.0f, 0.05f);
 	}
 
-	FragColor = vec4(mix( fogColor, ads(), fogFactor ), 1.0);
+	FragColor = vec4(ads(), 1.0); //vec4(mix( fogColor, ads(), fogFactor ), 1.0);
 
 }
