@@ -20,6 +20,12 @@ bool Sky::Initialize()
 	cloud = new Square3();
 	cloud->Initialize(1, 1000, "./textures/cloud.png", "basic_skybox_shader.vert", "basic_skybox_shader.frag");
 
+	horizon1 = new Cylinder2();
+	horizon1->Initialize(1, 40, 200, 200, "./textures/horizon1.png", "basic_skybox_shader.vert", "basic_skybox_shader.frag");
+
+	horizon2 = new Cylinder2();
+	horizon2->Initialize(1, 40, 200, 200, "./textures/horizon2.png", "basic_skybox_shader.vert", "basic_skybox_shader.frag");
+
 	for(int i=0; i<100; i++){
 		float r = 2000;
 		float t = 360*((float) rand()) / (float) RAND_MAX;
@@ -59,6 +65,17 @@ void Sky::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, cons
 	cloudMatrix = translate(cloudMatrix, vec3(0,cloudPositions.at(i).y,0));
 	cloud->Draw(projection, cloudMatrix, size, time);
 	}	
+
+	glDisable(GL_CULL_FACE);
+	mat4 horizonMatrix = modelview;
+	horizonMatrix = translate(modelview, userPosition);
+	horizon1->Draw(projection, horizonMatrix, size, time);
+	horizonMatrix = translate(modelview, userPosition + vec3(0,-40,0));
+	horizon2->Draw(projection, horizonMatrix, size, time);
+	horizonMatrix = translate(modelview, userPosition + vec3(0,-80,0));
+	horizon2->Draw(projection, horizonMatrix, size, time);
+	glEnable(GL_CULL_FACE);
+
 
 	glDepthMask(true);
 	glEnable(GL_DEPTH_TEST);

@@ -21,6 +21,7 @@ Project: First-Person Shooter
 #include "cylinder.h"
 #include "city.h"
 #include "sky.h"
+#include "forest.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,6 +75,7 @@ Precip precip;
 Cube2 skybox;Menu menu;
 City city;
 Sky sky;
+Forest forest;
 
 bool stadiumLoaded = false;
 
@@ -90,7 +92,7 @@ bool ePressed, wPressed, rPressed, zPressed, qPressed, aPressed, sPressed, dPres
 
 //Values defining the position/rotation of the camera.
 double RotatedX = 0;double RotatedY = 0;
-float transX = 0;float transY = 0;float transZ = 0;
+float transX = -6500;float transY = 0;float transZ = -7050;
 
 //Used to provide an angle for the snow falling when the user is moving
 float movingWRTSnow = 0;
@@ -272,6 +274,7 @@ void CloseFunc(){
 	skybox.TakeDown();
 	sky.TakeDown();
 	city.TakeDown();
+	forest.TakeDown();
 }
 
 //Maintains aspect ratio when window is resized.
@@ -318,9 +321,9 @@ void KeyboardFunc(unsigned char c, int x, int y){
 			}
 			break;
 		case 'i':  //Toggles wireframe mode
-			//window.wireframe = !window.wireframe;
+			window.wireframe = !window.wireframe;
 			//+z
-			city.currBuildingPosition.z++;
+			//city.currBuildingPosition.z++;
 			break;
 		case 'j':
 			//+x
@@ -480,7 +483,7 @@ void keyPress(){
 	}
 
 	if(wPressed){
-		maxUserVelocity = 5.f;
+		maxUserVelocity = 20.f;
 
 		if(velocity2 < maxUserVelocity){velocity2 += 0.1f;}
 		if(movingWRTSnow < 1){movingWRTSnow = movingWRTSnow + 0.2f;}
@@ -494,17 +497,18 @@ void keyPress(){
 
 //	userTeam->soldiers[0].person.velocity = velocity2;
 
-	if(zPressed){transY = transY - 1;}
-	if(qPressed){transY = transY + 1;}
-	if(sPressed){transZ = (float)(transZ - 1*cos(-RotatedY*3.14/180));transX = (float)(transX - 1*sin(-RotatedY*3.14/180));}
-	if(aPressed){transX = (float)(transX + 1*cos(RotatedY*3.14/180));transZ = (float)(transZ + 1*sin(RotatedY*3.14/180));}
-	if(dPressed){transX = (float)(transX - 1*cos(RotatedY*3.14/180));transZ = (float)(transZ - 1*sin(RotatedY*3.14/180));}
+	if(zPressed){transY = transY - 10;}
+	if(qPressed){transY = transY + 10;}
+	if(sPressed){transZ = (float)(transZ - 10*cos(-RotatedY*3.14/180));transX = (float)(transX - 10*sin(-RotatedY*3.14/180));}
+	if(aPressed){transX = (float)(transX + 10*cos(RotatedY*3.14/180));transZ = (float)(transZ + 10*sin(RotatedY*3.14/180));}
+	if(dPressed){transX = (float)(transX - 10*cos(RotatedY*3.14/180));transZ = (float)(transZ - 10*sin(RotatedY*3.14/180));}
 }
 
 //Set up the environment for game play after selected in the menu
 void initArena(){
 	sky.Initialize();
 	city.Initialize();	
+	forest.Initialize();
 }
 
 //Orchestrates all the objects and variables into a playable game
@@ -512,7 +516,7 @@ void GameDisplay(){
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.486f, 0.596f, 0.737f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	projection = perspective(25.0f, window.window_aspect, 0.01f, 3000.0f);
+	projection = perspective(25.0f, window.window_aspect, 0.01f, 7000.0f);
 	modelview = lookAt(lookAtEye, lookAtCenter, vec3(0.0f, 1.0f, 0.0f));
 	modelview = render(modelview);
 	glLoadMatrixf(value_ptr(modelview));
@@ -575,9 +579,17 @@ void GameDisplay(){
 		sky.userPosition = vec3(-transX, transY, -transZ);
 		sky.Draw(projection, modelview, tod, current_timeDisplay);
 
+		if(transX > -14238){
 		city.userPosition = vec3(-transX, transY, -transZ);
 		city.userRotation = RotatedY;
 		city.Draw(projection, modelview, tod, current_timeDisplay);
+		}
+
+		if(transX < -6238){
+		mat4 forestOffset = modelview;
+		forestOffset = translate(forestOffset, vec3(14241,0,4389));
+		forest.Draw(projection, forestOffset, tod, 0);
+		}
 		
 		glDepthMask(GL_FALSE);
 		drawPrecipitationWithRadar();

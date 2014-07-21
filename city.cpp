@@ -50,6 +50,10 @@ bool City::Initialize()
 	beachVerticalBridge->order = 1;
 	beachVerticalBridge->Initialize("./models/beachVerticalBridge.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
+	Gengar * beachVerticalBridge2 = new Gengar();
+	beachVerticalBridge2->order = 1;
+	beachVerticalBridge2->Initialize("./models/beachVerticalBridge2.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
 	Gengar * block1 = new Gengar();
 	block1->order = 1;
 	block1->Initialize("./models/block1.obj", "./textures/forestWall.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
@@ -96,9 +100,15 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==1 && j==7){
+			else if((i==1 || i==25) && j==7){
 				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(beachVerticalBridge);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
+			}
+			else if(i==24 && j==7){
+				cityBlocksRotations.push_back(180.f);
+				cityBlocks.push_back(beachVerticalBridge2);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
@@ -125,30 +135,6 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				tmpDim.ul = vec2(-537,126);tmpDim.dl = vec2(-537, -126);tmpDim.ur = vec2(519, 126);tmpDim.dr = vec2(519, -126);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			/*else if(i==7 && j==4){ //Return to this later
-				cityBlocksRotations.push_back(0.f);
-				cityBlocks.push_back(block4);
-				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
-				cityBlocksDimensions2.push_back(tmpDim);
-			}
-			else if(i==8 && j==5){ //Return to this later
-				cityBlocksRotations.push_back(180.f);
-				cityBlocks.push_back(block4);
-				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
-				cityBlocksDimensions2.push_back(tmpDim);
-			}
-			else if(i==7 && j==5){
-				cityBlocksRotations.push_back(0.f);
-				cityBlocks.push_back(block4Right);
-				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
-				cityBlocksDimensions2.push_back(tmpDim);
-			}
-			else if(i==8 && j==4){
-				cityBlocksRotations.push_back(180.f);
-				cityBlocks.push_back(block4Right);
-				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
-				cityBlocksDimensions2.push_back(tmpDim);
-			}*/
 			else{
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block1);
@@ -447,7 +433,8 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 						(cityBlocksBuildingsPositions.at(i).x < 700 || 
 						(buildingInFront(i, length0, 0, 400) || buildingInFront(i, length5, 5, 200) || buildingInFront(i, length5n, -5, 200)))
 
-						|| cityBlocksBuildings.at(i) < 2){
+						|| cityBlocksBuildings.at(i) < 2
+						|| building->dimensions.at(cityBlocksBuildings.at(i)).y > 1000){
 						buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 						buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 						building->buildingIndex = cityBlocksBuildings.at(i);
@@ -460,7 +447,8 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 						(cityBlocksBuildingsPositions.at(i).x > 5860 || 
 						(buildingInFront(i, length0, 0, 400) || buildingInFront(i, length5, 5, 200) || buildingInFront(i, length5n, -5, 200)))
 
-						|| cityBlocksBuildings.at(i) < 2){
+						|| cityBlocksBuildings.at(i) < 2
+						|| building->dimensions.at(cityBlocksBuildings.at(i)).y > 1000){
 						buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 						buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 						building->buildingIndex = cityBlocksBuildings.at(i);
@@ -474,7 +462,8 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 						(buildingInFront(i, length0, 0, 400) || buildingInFront(i, length5, 5, 200) || buildingInFront(i, length5n, -5, 200)
 						))
 
-						|| cityBlocksBuildings.at(i) < 2){
+						|| cityBlocksBuildings.at(i) < 2
+						|| building->dimensions.at(cityBlocksBuildings.at(i)).y > 1000){
 						buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 						buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 						building->buildingIndex = cityBlocksBuildings.at(i);
@@ -537,9 +526,15 @@ bool City::linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2){
 
 
 void City::loadBuildings(){
-cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6657, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7257, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8331, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9405, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10479, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6660, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7260, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8334, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9408, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10482, 0, 138));cityBlocksBuildingsRotations.push_back(0);
+
+cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6660, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7260, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8334, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9408, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
+cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10482, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
 }

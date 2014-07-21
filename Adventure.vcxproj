@@ -86,6 +86,7 @@
     <ClInclude Include="cylinder2.h" />
     <ClInclude Include="disc.h" />
     <ClInclude Include="fbo.h" />
+    <ClInclude Include="forest.h" />
     <ClInclude Include="gengar.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="impostor.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="cylinder2.cpp" />
     <ClCompile Include="disc.cpp" />
     <ClCompile Include="fbo.cpp" />
+    <ClCompile Include="forest.cpp" />
     <ClCompile Include="gengar.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="impostor.cpp" />

@@ -22,7 +22,15 @@ uniform sampler2D picture;
 uniform ivec2 size;
 uniform float time;
 
-vec4 color = texture(picture, tc);
+float vertOffset = tc.y + mod(time, 500)/500 + (tc.y + mod(time, 500)/500 > 1 ? -1 : 0);
+//if(vertOffset > 1){vertOffset = vertOffset - 1;}
+vec2 tc2 = vec2(tc.x, vertOffset);
+//float textureOffset = mod(time, 1000)/1000;
+//tc2.x = tc2.x + 0.5;
+//if(tc2.x > 1){tc2.x = tc2.x - 1;}
+
+
+vec4 color = texture(picture, tc2);
 
 vec3 ads()
 {
@@ -40,9 +48,9 @@ void main()
 {
 	vec3 finalColor = vec3(color);
 
-	float dist1 = abs( vertPos.z );
-	float fogFactor = (7000.0f - dist1) /
-	(7000.0f - 0.5f);
+	float dist1 = abs( Position.z );
+	float fogFactor = (3000.0f - dist1) /
+	(3000.0f - 0.5f);
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );
 
 	vec3 fogColor = vec3(0.1f, 0.1f, 0.1f);
@@ -66,7 +74,12 @@ void main()
 	fogColor = vec3(0.486f, 0.596f, 0.737f);
 	finalColor = vec3(mix( fogColor, finalColor, fogFactor ));
 
-	finalColor = finalColor + vec3(0.035*sin(vertPos.z/100 - 3*time), 0.035*sin(vertPos.z/100 - 3*time), 0.035*sin(vertPos.z/100 - 3*time) + 0.05);
+	finalColor = finalColor + vec3(0.045*sin(vertPos.z/100 - 3*time), 0.045*sin(vertPos.z/100 - 3*time), 0.045*sin(vertPos.z/100 - 3*time) + 0.05);
+
+	//if(fract(sin(dot(Position.xy ,vec2(12.9898,78.233))) * 43758.5453) < 0.05){finalColor = finalColor + ((1000-abs(mod(vertPos.z, 2000)-1000))/500)*vec3(0.1, 0.1, 0.1);}
+
+	fogColor = vec3(0.298f, 0.38f, 0.494f);
+	finalColor = vec3(mix( fogColor, finalColor, fogFactor ));
 
 	FragColor = vec4(finalColor, color.a);
 }

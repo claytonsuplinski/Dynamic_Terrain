@@ -67,7 +67,7 @@ bool Cylinder2::Initialize(int slices, float h, float r1, float r2, char* filena
 
 		cur_vertex.position = vec3(m * x_axis);
 		cur_vertex.normal = normalize(cur_vertex.position);
-		cur_vertex.texture_coordinate = vec2(1.0f, 1.0f);
+		cur_vertex.texture_coordinate = vec2(0.0f, 0.0f);
 
 		m = translate(m, z_axis);
 
@@ -81,7 +81,7 @@ bool Cylinder2::Initialize(int slices, float h, float r1, float r2, char* filena
 
 		dwr_vertex.position = vec3(m * x_axis2);
 		dwr_vertex.normal = normalize(dwr_vertex.position);
-		dwr_vertex.texture_coordinate = vec2(0.0f, 0.0f);
+		dwr_vertex.texture_coordinate = vec2(1.0f, 1.0f);
 
 		m = translate(m, -z_axis);
 		m = rotate(m, -increment, y_axis);		

@@ -9,6 +9,7 @@ Project: First-Person Shooter
 #include "gengar.h"
 #include "square3.h"
 #include "sphere.h"
+#include "cylinder2.h"
 
 using namespace std;
 using namespace glm;
@@ -24,6 +25,7 @@ public:
 
 	Square3 * sun;
 	Square3 * cloud; 
+	Cylinder2 * horizon1, * horizon2;
 
 	vector<vec3> cloudPositions;
 
