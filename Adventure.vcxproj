@@ -84,6 +84,7 @@
     <ClInclude Include="cube3.h" />
     <ClInclude Include="cylinder.h" />
     <ClInclude Include="cylinder2.h" />
+    <ClInclude Include="desert.h" />
     <ClInclude Include="disc.h" />
     <ClInclude Include="fbo.h" />
     <ClInclude Include="forest.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="cube3.cpp" />
     <ClCompile Include="cylinder.cpp" />
     <ClCompile Include="cylinder2.cpp" />
+    <ClCompile Include="desert.cpp" />
     <ClCompile Include="disc.cpp" />
     <ClCompile Include="fbo.cpp" />
     <ClCompile Include="forest.cpp" />

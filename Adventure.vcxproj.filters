@@ -116,6 +116,9 @@
     <ClInclude Include="forest.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="desert.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -210,6 +213,9 @@
       <Filter>Environments</Filter>
     </ClCompile>
     <ClCompile Include="forest.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="desert.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>

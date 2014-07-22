@@ -22,6 +22,7 @@ Project: First-Person Shooter
 #include "city.h"
 #include "sky.h"
 #include "forest.h"
+#include "desert.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,6 +77,7 @@ Cube2 skybox;Menu menu;
 City city;
 Sky sky;
 Forest forest;
+Desert desert;
 
 bool stadiumLoaded = false;
 
@@ -275,6 +277,7 @@ void CloseFunc(){
 	sky.TakeDown();
 	city.TakeDown();
 	forest.TakeDown();
+	desert.TakeDown();
 }
 
 //Maintains aspect ratio when window is resized.
@@ -509,6 +512,7 @@ void initArena(){
 	sky.Initialize();
 	city.Initialize();	
 	forest.Initialize();
+	desert.Initialize();
 }
 
 //Orchestrates all the objects and variables into a playable game
@@ -589,6 +593,12 @@ void GameDisplay(){
 		mat4 forestOffset = modelview;
 		forestOffset = translate(forestOffset, vec3(14241,0,4389));
 		forest.Draw(projection, forestOffset, tod, 0);
+		}
+
+		if(transX < -6238){
+		mat4 desertOffset = modelview;
+		desertOffset = translate(desertOffset, vec3(14241,0,11589));
+		desert.Draw(projection, desertOffset, tod, 0);
 		}
 		
 		glDepthMask(GL_FALSE);

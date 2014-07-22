@@ -88,8 +88,26 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
+			else if(i==32 && j==0){ //Need different texture
+				cityBlocksRotations.push_back(90.f);
+				cityBlocks.push_back(beachCorner);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
+			}
+			else if(i==32 && j==7){ //Need different texture
+				cityBlocksRotations.push_back(180.f);
+				cityBlocks.push_back(beachCorner);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
+			}
 			else if(i==0 && (j>0 && j<7)){
 				cityBlocksRotations.push_back(0.f);
+				cityBlocks.push_back(beachHorizontal);
+				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+				cityBlocksDimensions2.push_back(tmpDim);
+			}
+			else if(i==32 && (j>0 && j<7)){ //Need different texture
+				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(beachHorizontal);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
