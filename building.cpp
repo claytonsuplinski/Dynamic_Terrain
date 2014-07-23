@@ -62,11 +62,11 @@ void Building::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size,
 		return;	
 	}
 
-	if(buildingIndex == 10){
+	if(buildingIndex == 7){
 		glDisable(GL_CULL_FACE);
 	}
 	buildings.at(buildingIndex)->Draw(projection, modelview, size, time);
-	if(buildingIndex == 10){
+	if(buildingIndex == 7){
 		glEnable(GL_CULL_FACE);
 	}
 

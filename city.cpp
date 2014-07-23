@@ -358,7 +358,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.x + building->dimensions.at(randomizedBuilding).z/2,
 								0,
 								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dl.y + building->dimensions.at(randomizedBuilding).x/2 + leftOffsetBottom));
-							cityBlocksBuildingsRotations.push_back(90);
+							cityBlocksBuildingsRotations.push_back(270);
 							leftOffsetBottom += building->dimensions.at(randomizedBuilding).x;
 						}
 						else{
@@ -376,7 +376,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 								vec3(widthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dr.x - building->dimensions.at(randomizedBuilding).z/2,
 								0,
 								lengthOffset + cityBlocksDimensions2.at(i*cityWidth + j).dr.y + building->dimensions.at(randomizedBuilding).x/2 + rightOffsetBottom));
-							cityBlocksBuildingsRotations.push_back(270);
+							cityBlocksBuildingsRotations.push_back(90);
 							rightOffsetBottom += building->dimensions.at(randomizedBuilding).x;
 						}
 						else{
