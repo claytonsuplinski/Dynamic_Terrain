@@ -10,6 +10,12 @@ Project: First-Person Shooter
 #include "building.h"
 #include <fstream>
 
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/polygon.hpp>
+
+#include <boost/geometry/io/wkt/wkt.hpp>
+
 using namespace std;
 using namespace glm;
 
@@ -23,6 +29,9 @@ public:
 	void saveBuildingVertices();
 	void TakeDown();
 	void loadBuildings();
+
+	float sign(vec2 p1, vec2 p2, vec2 p3);
+	bool PointInTriangle(vec2 pt, vec2 v1, vec2 v2, vec2 v3);
 
 	bool buildingInFront(int buildingIndex, float distance, float angleOffset, float buffer);
 	bool linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2);

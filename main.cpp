@@ -520,7 +520,7 @@ void GameDisplay(){
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.486f, 0.596f, 0.737f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	projection = perspective(25.0f, window.window_aspect, 0.01f, 7000.0f);
+	projection = perspective(25.0f, window.window_aspect, 0.1f, 7000.0f);
 	modelview = lookAt(lookAtEye, lookAtCenter, vec3(0.0f, 1.0f, 0.0f));
 	modelview = render(modelview);
 	glLoadMatrixf(value_ptr(modelview));

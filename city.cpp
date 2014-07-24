@@ -425,10 +425,67 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 	//Simpler plan for dealing with buildings in the city 
 		//Only draw buildings within a certain x/z range of you
 
+	/*typedef boost::geometry::model::d2::point_xy<double> point_type;
+	typedef boost::geometry::model::polygon<point_type> polygon_type;
+	polygon_type poly;
+	boost::geometry::read_wkt(
+		"POLYGON((1 1,1 -1,-1 -1,-1 -1))", poly);*/
+
 	for(int i=0; i<cityBlocksBuildings.size(); i++){		
 	//	if((abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 3000 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 200)
 	//		|| (abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 200 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 3000)){
 
+		if(abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x) < 7000 && abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z) < 7000){
+
+			if(abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x) < 400 && abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z) < 400
+				|| cityBlocksBuildings.at(i) < 2){
+				buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+				buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+				building->buildingIndex = cityBlocksBuildings.at(i);
+				building->Draw(projection, buildingMatrix, size, 0);
+			}
+			else{
+			
+				userRotation = -userRotation;
+				vec2 vert1 = vec2(userPosition.x,userPosition.z);vec2 vert2 = vec2(userPosition.x,userPosition.z);
+				vec2 forward = vec2(-sin(userRotation*3.14/180), -cos(userRotation*3.14/180));
+				vec2 left = vec2(-cos(-userRotation*3.14/180), -sin(-userRotation*3.14/180));
+				vec2 right = -left;	
+				userRotation = -userRotation;
+
+				if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 100){
+					forward*=3000;left*=1700;right*=1700;
+				}
+				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 200){
+					forward*=3000;left*=1700;right*=1700;
+				}
+				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 300){
+					forward*=3000;left*=1700;right*=1700;
+				}
+				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 400){
+					forward*=3000;left*=1700;right*=1700;
+				}
+				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 1000){
+					forward*=4000;left*=2050;right*=2050;
+				}
+				else{
+					forward*=7000;left*=4000;right*=4000;
+				}
+
+				vert1 += forward + left;
+				vert2 += forward + right;
+
+				if(PointInTriangle(vec2(cityBlocksBuildingsPositions.at(i).x, cityBlocksBuildingsPositions.at(i).z), 
+					vec2(userPosition.x,userPosition.z), vert1, vert2)){
+					buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+					buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+					building->buildingIndex = cityBlocksBuildings.at(i);
+					building->Draw(projection, buildingMatrix, size, 0);
+				}
+			}
+		}
+
+		/*
 		bool alreadyDrewBuilding = false;
 		if(abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x) < 3000 && abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z) < 3000){
 			if(userPosition.x > 150 && userPosition.x < 6560 && userPosition.z > 150){ // Inside the city
@@ -490,7 +547,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	/*buildingMatrix = translate(modelview, currBuildingPosition);
@@ -525,6 +582,22 @@ bool City::buildingInFront(int buildingIndex, float distance, float angleOffset,
 
 	}
 	return false;
+}
+
+float City::sign(vec2 p1, vec2 p2, vec2 p3)
+{
+  return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
+
+bool City::PointInTriangle(vec2 pt, vec2 v1, vec2 v2, vec2 v3)
+{
+  bool b1, b2, b3;
+
+  b1 = sign(pt, v1, v2) < 0.0f;
+  b2 = sign(pt, v2, v3) < 0.0f;
+  b3 = sign(pt, v3, v1) < 0.0f;
+
+  return ((b1 == b2) && (b2 == b3));
 }
 
 bool CCW(vec2 C, vec2 W1, vec2 W2){

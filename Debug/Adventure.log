@@ -1,10 +1,16 @@
-﻿Build started 7/22/2014 9:21:13 PM.
+﻿Build started 7/23/2014 9:01:27 PM.
      1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt building.cpp
-         building.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt city.cpp
+         city.cpp
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(179): warning C4305: '=' : truncation from '__int64' to 'float'
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(180): warning C4305: '=' : truncation from '__int64' to 'float'
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(17): warning C4101: 'tmpGengar' : unreferenced local variable
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(215): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(434): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\city.cpp(568): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -55,4 +61,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.31
+Time Elapsed 00:00:06.61
