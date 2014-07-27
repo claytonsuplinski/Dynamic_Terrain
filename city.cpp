@@ -243,6 +243,8 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 			another = translate(modelview, vec3(widthOffset, 0, lengthOffset));
 
 			if(!buildingsInitialized){
+				cityBlocksPositions.push_back(vec3(widthOffset, 0, lengthOffset));
+
 				if(cityBlocksDimensions2.at(i*cityWidth + j).dl.x != 0){
 
 					float topOffsetLeft = 0;
@@ -389,8 +391,11 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 			lengthOffset -= this->cityBlocksDimensions.at(i*cityWidth + j).length/2;
 			widthOffset += this->cityBlocksDimensions.at(i*cityWidth + j).width/2;
 
+			if(abs(userPosition.x - cityBlocksPositions.at(i*cityWidth + j).x) < 3500
+				&& abs(userPosition.z - cityBlocksPositions.at(i*cityWidth + j).z) < 3000){
 			another = rotate(another, cityBlocksRotations.at(i*cityWidth + j), vec3(0,1,0));
 			cityBlocks.at(i*cityWidth + j)->Draw(projection, another, size, 0);
+			}
 
 			
 		}
@@ -424,12 +429,6 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 	//Simpler plan for dealing with buildings in the city 
 		//Only draw buildings within a certain x/z range of you
-
-	/*typedef boost::geometry::model::d2::point_xy<double> point_type;
-	typedef boost::geometry::model::polygon<point_type> polygon_type;
-	polygon_type poly;
-	boost::geometry::read_wkt(
-		"POLYGON((1 1,1 -1,-1 -1,-1 -1))", poly);*/
 
 	for(int i=0; i<cityBlocksBuildings.size(); i++){		
 	//	if((abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 3000 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 200)
@@ -549,11 +548,6 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 			}
 		}*/
 	}
-
-	/*buildingMatrix = translate(modelview, currBuildingPosition);
-	buildingMatrix = rotate(buildingMatrix, currBuildingRotation, vec3(0,1,0));
-	building->buildingIndex = currBuilding;
-	building->Draw(projection, buildingMatrix, size, 0);*/
 	
 
 	if (this->GLReturnedError("City::Draw - on exit")){

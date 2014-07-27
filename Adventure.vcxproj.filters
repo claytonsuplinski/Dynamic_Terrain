@@ -119,6 +119,18 @@
     <ClInclude Include="desert.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="user.h">
+      <Filter>Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="terrainManager.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
+    <ClInclude Include="plains.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
+    <ClInclude Include="mountains.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -216,6 +228,18 @@
       <Filter>Environments</Filter>
     </ClCompile>
     <ClCompile Include="desert.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="terrainManager.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="plains.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="mountains.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>

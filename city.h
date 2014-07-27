@@ -10,12 +10,6 @@ Project: First-Person Shooter
 #include "building.h"
 #include <fstream>
 
-#include <boost/geometry.hpp>
-#include <boost/geometry/geometries/point_xy.hpp>
-#include <boost/geometry/geometries/polygon.hpp>
-
-#include <boost/geometry/io/wkt/wkt.hpp>
-
 using namespace std;
 using namespace glm;
 
@@ -50,6 +44,7 @@ public:
 
 	Building * building;
 	vector<Gengar*> cityBlocks;
+	vector<vec3> cityBlocksPositions;
 
 	vector<int> cityBlocksBuildings;
 	vector<vec3> cityBlocksBuildingsPositions;

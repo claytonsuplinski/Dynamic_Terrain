@@ -16,7 +16,7 @@ bool Forest::Initialize()
 
 	terrain = new Gengar();
 	terrain->order = 1;
-	terrain->Initialize("./models/terrain/forest.obj", "./textures/floorPatternForest.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	terrain->Initialize("./models/terrain/forest.obj", "./models/terrain/forest.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 	
 	if (this->GLReturnedError("Forest::Initialize - on exit"))
 		return false;

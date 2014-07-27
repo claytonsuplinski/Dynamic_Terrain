@@ -19,10 +19,10 @@ Project: First-Person Shooter
 #include "menu.h"
 #include "precip.h"
 #include "cylinder.h"
-#include "city.h"
+#include "terrainManager.h"
 #include "sky.h"
-#include "forest.h"
-#include "desert.h"
+
+#include "user.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,10 +74,10 @@ float current_timeDisplay;
 Cylinder healthBar;
 Precip precip;
 Cube2 skybox;Menu menu;
-City city;
+TerrainManager terrainManager;
 Sky sky;
-Forest forest;
-Desert desert;
+
+User user;
 
 bool stadiumLoaded = false;
 
@@ -275,9 +275,8 @@ void CloseFunc(){
 	healthBar.TakeDown();
 	skybox.TakeDown();
 	sky.TakeDown();
-	city.TakeDown();
-	forest.TakeDown();
-	desert.TakeDown();
+	terrainManager.TakeDown();
+	user.TakeDown();
 }
 
 //Maintains aspect ratio when window is resized.
@@ -317,78 +316,16 @@ void KeyboardFunc(unsigned char c, int x, int y){
 			}
 			break;
 
-		case 'r':
-			city.currBuildingRotation+=90;
-			if(city.currBuildingRotation >= 360){
-				city.currBuildingRotation = 0;
-			}
-			break;
 		case 'i':  //Toggles wireframe mode
 			window.wireframe = !window.wireframe;
 			//+z
 			//city.currBuildingPosition.z++;
 			break;
+
 		case 'j':
-			//+x
-			city.currBuildingPosition.x++;
+			cout << transX << ", " << transY << ", " << transZ << endl;
 			break;
-		case 'k':
-			//-z
-			city.currBuildingPosition.z--;
-			break;
-		case 'l':
-			//-x
-			city.currBuildingPosition.x--;
-			break;
-		case '8':  //Toggles wireframe mode
-			//window.wireframe = !window.wireframe;
-			//+z
-			city.currBuildingPosition.z+=6;
-			break;
-		case '4':
-			//+x
-			city.currBuildingPosition.x+=6;
-			break;
-		case '5':
-			//-z
-			city.currBuildingPosition.z-=6;
-			break;
-		case '6':
-			//-x
-			city.currBuildingPosition.x-=6;
-			break;
-		case 'u':
-			//+y
-			city.currBuildingPosition.y+=0.5;
-			break;
-		case 'n':
-			//-y
-			city.currBuildingPosition.y-=0.5;
-			break;
-		case 'h':
-			city.currBuilding++;
-			city.currBuilding%=city.building->buildings.size();
-			break;
-		case 'g':
-			city.currBuilding--;
-			if(city.currBuilding < 0){city.currBuilding=city.building->buildings.size()-1;}
-			break;
-
-		case 'c': 
-			city.cityBlocksBuildings.pop_back();
-			city.cityBlocksBuildingsPositions.pop_back();
-			city.cityBlocksBuildingsRotations.pop_back();
-			break;
-
-		case 'v': 
-			city.cityBlocksBuildings.push_back(city.currBuilding);
-			city.cityBlocksBuildingsPositions.push_back(city.currBuildingPosition);
-			city.cityBlocksBuildingsRotations.push_back(city.currBuildingRotation);
-			break;
-
-		case 'x': 
-			city.saveBuildingVertices();
-			break;
+		
 
 		case '1': 	
 			if(menu.menuOn){menu.Update(1);}
@@ -399,12 +336,12 @@ void KeyboardFunc(unsigned char c, int x, int y){
 		case '3':
 			if(menu.menuOn){menu.Update(3);}
 			return;
-		/*case '4':
+		case '4':
 			if(menu.menuOn){menu.Update(4);}
 			return;
 		case '5':
 			if(menu.menuOn){menu.Update(5);}
-			return;*/
+			return;
 
 		case 13: //Enter key
 			return;
@@ -510,9 +447,9 @@ void keyPress(){
 //Set up the environment for game play after selected in the menu
 void initArena(){
 	sky.Initialize();
-	city.Initialize();	
-	forest.Initialize();
-	desert.Initialize();
+	terrainManager.Initialize();
+
+	user.Initialize();
 }
 
 //Orchestrates all the objects and variables into a playable game
@@ -575,6 +512,7 @@ void GameDisplay(){
 //		*gmRotatedX = RotatedX;*gmRotatedY = RotatedY;
 
 //		gm1.DrawUser(projection, modelview, tod, 0);
+		user.Draw(projection, modelview, tod, 0);
 
 		modelview = render(modelview);
 
@@ -583,23 +521,9 @@ void GameDisplay(){
 		sky.userPosition = vec3(-transX, transY, -transZ);
 		sky.Draw(projection, modelview, tod, current_timeDisplay);
 
-		if(transX > -14238){
-		city.userPosition = vec3(-transX, transY, -transZ);
-		city.userRotation = RotatedY;
-		city.Draw(projection, modelview, tod, current_timeDisplay);
-		}
-
-		if(transX < -6238){
-		mat4 forestOffset = modelview;
-		forestOffset = translate(forestOffset, vec3(14241,0,4389));
-		forest.Draw(projection, forestOffset, tod, 0);
-		}
-
-		if(transX < -6238){
-		mat4 desertOffset = modelview;
-		desertOffset = translate(desertOffset, vec3(14241,0,11589));
-		desert.Draw(projection, desertOffset, tod, 0);
-		}
+		terrainManager.userPosition = vec3(transX, transY, transZ);
+		terrainManager.userRotation = RotatedY;
+		terrainManager.Draw(projection, modelview, tod, current_timeDisplay);
 		
 		glDepthMask(GL_FALSE);
 		drawPrecipitationWithRadar();

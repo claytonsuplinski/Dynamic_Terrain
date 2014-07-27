@@ -92,8 +92,10 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="impostor.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="mountains.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="object2.h" />
+    <ClInclude Include="plains.h" />
     <ClInclude Include="precip.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="shader2.h" />
@@ -105,8 +107,10 @@
     <ClInclude Include="square2.h" />
     <ClInclude Include="square3.h" />
     <ClInclude Include="square4.h" />
+    <ClInclude Include="terrainManager.h" />
     <ClInclude Include="texturedshader.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="user.h" />
     <ClInclude Include="vertexattributes.h" />
     <ClInclude Include="vertexattributes2.h" />
   </ItemGroup>
@@ -127,8 +131,10 @@
     <ClCompile Include="impostor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="mountains.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="object2.cpp" />
+    <ClCompile Include="plains.cpp" />
     <ClCompile Include="precip.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shader2.cpp" />
@@ -140,8 +146,10 @@
     <ClCompile Include="square2.cpp" />
     <ClCompile Include="square3.cpp" />
     <ClCompile Include="square4.cpp" />
+    <ClCompile Include="terrainManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="textureshader.cpp" />
+    <ClCompile Include="user.cpp" />
     <ClCompile Include="vertexattributes.cpp" />
     <ClCompile Include="vertexattributes2.cpp" />
   </ItemGroup>

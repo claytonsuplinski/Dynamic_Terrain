@@ -20,7 +20,7 @@ public:
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
 	void TakeDown();
 
-	Gengar * terrain;
+	Gengar * terrain, * terrain2;
 
 	bool buildingInFront(int buildingIndex, float distance, float angleOffset, float buffer);
 	bool linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2);

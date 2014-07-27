@@ -17,6 +17,10 @@ bool Desert::Initialize()
 	terrain = new Gengar();
 	terrain->order = 1;
 	terrain->Initialize("./models/terrain/desert1.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	terrain2 = new Gengar();
+	terrain2->order = 1;
+	terrain2->Initialize("./models/terrain/desert2.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
 	
 	if (this->GLReturnedError("Desert::Initialize - on exit"))
 		return false;
@@ -33,6 +37,11 @@ void Desert::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, c
 	}
 	
 	terrain->Draw(projection, modelview, size, time);
+
+	mat4 another = modelview;
+
+	another = translate(another, vec3(0,0,4400));
+	terrain2->Draw(projection, another, size, time);
 
 	if (this->GLReturnedError("Desert::Draw - on exit")){
 		return;
