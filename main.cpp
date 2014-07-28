@@ -94,7 +94,7 @@ bool ePressed, wPressed, rPressed, zPressed, qPressed, aPressed, sPressed, dPres
 
 //Values defining the position/rotation of the camera.
 double RotatedX = 0;double RotatedY = 0;
-float transX = -6500;float transY = 0;float transZ = -7050;
+float transX = 0;float transY = 0;float transZ = 0;
 
 //Used to provide an angle for the snow falling when the user is moving
 float movingWRTSnow = 0;
@@ -234,6 +234,8 @@ void mouseRotations(int stadium, int person){
 		//Turning controls
 		if(mouseX < window.size.x/2){RotatedY -= abs((mouseX - window.size.x/2)/75);}
 		else if(mouseX > window.size.x/2){RotatedY += abs((mouseX - window.size.x/2)/75);}
+		if(RotatedY < 0){RotatedY+=360;}
+		else if(RotatedY >= 360){RotatedY-=360;}
 	}
 	prevMouseY = mouseY;
 }

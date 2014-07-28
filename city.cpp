@@ -430,14 +430,20 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 	//Simpler plan for dealing with buildings in the city 
 		//Only draw buildings within a certain x/z range of you
 
+	float modUserRot = fmod(userRotation, 180.f);
+	bool insideCity = (userPosition.x > 150 && userPosition.x < 6560 && userPosition.z > 150 && userPosition.z < 9054);
+
 	for(int i=0; i<cityBlocksBuildings.size(); i++){		
 	//	if((abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 3000 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 200)
 	//		|| (abs(cityBlocksBuildingsPositions.at(i).x - userPosition.x) < 200 && abs(cityBlocksBuildingsPositions.at(i).z - userPosition.z) < 3000)){
 
-		if(abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x) < 7000 && abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z) < 7000){
+		float absDistX = abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x);
+		float absDistZ = abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z);
 
-			if(abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x) < 400 && abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z) < 400
-				|| cityBlocksBuildings.at(i) < 2){
+		if(absDistX < 7000 && absDistZ < 7000){
+
+			if(absDistX < 400 && absDistZ < 400
+				|| cityBlocksBuildings.at(i) < 5){
 				buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 				buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 				building->buildingIndex = cityBlocksBuildings.at(i);
@@ -445,41 +451,113 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 			}
 			else{
 			
-				userRotation = -userRotation;
-				vec2 vert1 = vec2(userPosition.x,userPosition.z);vec2 vert2 = vec2(userPosition.x,userPosition.z);
-				vec2 forward = vec2(-sin(userRotation*3.14/180), -cos(userRotation*3.14/180));
-				vec2 left = vec2(-cos(-userRotation*3.14/180), -sin(-userRotation*3.14/180));
-				vec2 right = -left;	
-				userRotation = -userRotation;
+				if(insideCity){ //inside the city
+					//Forget frustum, just draw buildings along the lines
+	
+					if(modUserRot < 135 && modUserRot > 45){
+						if(absDistZ < 500 && absDistX < 3500){
+							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+							building->buildingIndex = cityBlocksBuildings.at(i);
+							building->Draw(projection, buildingMatrix, size, 0);
+						}
+					}
+					else{
+						if(absDistX < 500  && absDistZ < 3500){
+							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+							building->buildingIndex = cityBlocksBuildings.at(i);
+							building->Draw(projection, buildingMatrix, size, 0);
+						}
+					}
+					
+				}
+				else{ //outside the city
+					//stop using frustum, only draw a certain range along the city boundary and all those in a line with the user
+					
+					//(userPosition.x > 150 && userPosition.x < 6560 && userPosition.z > 150 && userPosition.z < 9054)
+					bool alreadyDrawn = false;
+					if(userPosition.x <= 150){
+						if(cityBlocksBuildingsPositions.at(i).x < 550 || (absDistZ < 500 && absDistX < 3000)){
+							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+							building->buildingIndex = cityBlocksBuildings.at(i);
+							building->Draw(projection, buildingMatrix, size, 0);
+							alreadyDrawn = true;
+						}
+					}
+					else if(userPosition.x >= 6560){
+						if(cityBlocksBuildingsPositions.at(i).x > 6160 || (absDistZ < 500 && absDistX < 3000)){
+							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+							building->buildingIndex = cityBlocksBuildings.at(i);
+							building->Draw(projection, buildingMatrix, size, 0);
+							alreadyDrawn = true;
+						}
+					}
 
-				if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 100){
-					forward*=3000;left*=1700;right*=1700;
-				}
-				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 200){
-					forward*=3000;left*=1700;right*=1700;
-				}
-				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 300){
-					forward*=3000;left*=1700;right*=1700;
-				}
-				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 400){
-					forward*=3000;left*=1700;right*=1700;
-				}
-				else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 1000){
-					forward*=4000;left*=2050;right*=2050;
-				}
-				else{
-					forward*=7000;left*=4000;right*=4000;
-				}
+					if(!alreadyDrawn){
+						if(userPosition.z <= 150){
+							if(cityBlocksBuildingsPositions.at(i).z < 550 || (absDistX < 500 && absDistZ < 3000)){
+								buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+								buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+								building->buildingIndex = cityBlocksBuildings.at(i);
+								building->Draw(projection, buildingMatrix, size, 0);
+							}
+						}
+						else if(userPosition.z >= 9054){
+							if(cityBlocksBuildingsPositions.at(i).z > 8654 || (absDistX < 500 && absDistZ < 3000)){
+								buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+								buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+								building->buildingIndex = cityBlocksBuildings.at(i);
+								building->Draw(projection, buildingMatrix, size, 0);
+							}
+						}
+					}
 
-				vert1 += forward + left;
-				vert2 += forward + right;
 
-				if(PointInTriangle(vec2(cityBlocksBuildingsPositions.at(i).x, cityBlocksBuildingsPositions.at(i).z), 
-					vec2(userPosition.x,userPosition.z), vert1, vert2)){
-					buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
-					buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
-					building->buildingIndex = cityBlocksBuildings.at(i);
-					building->Draw(projection, buildingMatrix, size, 0);
+					/*//Frustum Calculations
+				
+					userRotation = -userRotation;
+					vec2 vert1 = vec2(userPosition.x,userPosition.z);vec2 vert2 = vec2(userPosition.x,userPosition.z);
+					vec2 forward = vec2(-sin(userRotation*3.14/180), -cos(userRotation*3.14/180));
+					vec2 left = vec2(-cos(-userRotation*3.14/180), -sin(-userRotation*3.14/180));
+					vec2 right = -left;	
+					userRotation = -userRotation;
+
+				
+				
+
+					if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 100){
+						forward*=3000;left*=1700;right*=1700;
+					}
+					else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 200){
+						forward*=3000;left*=1700;right*=1700;
+					}
+					else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 300){
+						forward*=3000;left*=1700;right*=1700;
+					}
+					else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 400){
+						forward*=3000;left*=1700;right*=1700;
+					}
+					else if(building->dimensions.at(cityBlocksBuildings.at(i)).y < 1000){
+						forward*=4000;left*=2050;right*=2050;
+					}
+					else{
+						forward*=7000;left*=4000;right*=4000;
+					}
+
+					vert1 += forward + left;
+					vert2 += forward + right;
+
+					if(PointInTriangle(vec2(cityBlocksBuildingsPositions.at(i).x, cityBlocksBuildingsPositions.at(i).z), 
+						vec2(userPosition.x,userPosition.z), vert1, vert2)){
+						buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
+						buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
+						building->buildingIndex = cityBlocksBuildings.at(i);
+						building->Draw(projection, buildingMatrix, size, 0);
+					}
+					*/
 				}
 			}
 		}
