@@ -94,7 +94,7 @@ bool ePressed, wPressed, rPressed, zPressed, qPressed, aPressed, sPressed, dPres
 
 //Values defining the position/rotation of the camera.
 double RotatedX = 0;double RotatedY = 0;
-float transX = 0;float transY = 0;float transZ = 0;
+float transX = 0;float transY = 0;float transZ = -9000;
 
 //Used to provide an angle for the snow falling when the user is moving
 float movingWRTSnow = 0;
@@ -508,6 +508,9 @@ void GameDisplay(){
 
 		//makeSkybox();
 
+		sky.userPosition = vec3(-transX, transY, -transZ);
+		sky.Draw(projection, modelview, tod, current_timeDisplay);
+
 		modelview = endRender(modelview);
 
 //		*gmTransX = transX;*gmTransY = transY;*gmTransZ = transZ;
@@ -519,9 +522,6 @@ void GameDisplay(){
 		modelview = render(modelview);
 
 //		gm1.DrawTeams(projection, modelview, tod, 0);
-
-		sky.userPosition = vec3(-transX, transY, -transZ);
-		sky.Draw(projection, modelview, tod, current_timeDisplay);
 
 		terrainManager.userPosition = vec3(transX, transY, transZ);
 		terrainManager.userRotation = RotatedY;

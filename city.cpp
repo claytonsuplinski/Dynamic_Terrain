@@ -32,47 +32,55 @@ bool City::Initialize()
 
 	Gengar * beachCorner = new Gengar();
 	beachCorner->order = 1;
-	beachCorner->Initialize("./models/beachCorner.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachCorner->Initialize("./models/beachCorner.obj", "./models/beachCorner.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * beachCornerBridge = new Gengar();
 	beachCornerBridge->order = 1;
-	beachCornerBridge->Initialize("./models/beachCornerBridge.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachCornerBridge->Initialize("./models/beachCornerBridge.obj", "./models/beachCornerBridge.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	Gengar * beachCornerPlains = new Gengar();
+	beachCornerPlains->order = 1;
+	beachCornerPlains->Initialize("./models/beachCornerPlains.obj", "./models/beachCornerPlains.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	Gengar * beachCornerPlains2 = new Gengar();
+	beachCornerPlains2->order = 1;
+	beachCornerPlains2->Initialize("./models/beachCornerPlains2.obj", "./models/beachCornerPlains2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * beachHorizontal = new Gengar();
 	beachHorizontal->order = 1;
-	beachHorizontal->Initialize("./models/beachHorizontal.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachHorizontal->Initialize("./models/beachHorizontal.obj", "./models/beachHorizontal.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	Gengar * beachHorizontalPlains = new Gengar();
+	beachHorizontalPlains->order = 1;
+	beachHorizontalPlains->Initialize("./models/beachHorizontalPlains.obj", "./models/beachHorizontalPlains.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	Gengar * beachHorizontalPlainsHighway = new Gengar();
+	beachHorizontalPlainsHighway->order = 1;
+	beachHorizontalPlainsHighway->Initialize("./models/beachHorizontalPlainsHighway.obj", "./models/beachHorizontalPlainsHighway.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * beachVertical = new Gengar();
 	beachVertical->order = 1;
-	beachVertical->Initialize("./models/beachVertical.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachVertical->Initialize("./models/beachVertical.obj", "./models/beachVertical.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * beachVerticalBridge = new Gengar();
 	beachVerticalBridge->order = 1;
-	beachVerticalBridge->Initialize("./models/beachVerticalBridge.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachVerticalBridge->Initialize("./models/beachVerticalBridge.obj", "./models/beachVerticalBridge.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * beachVerticalBridge2 = new Gengar();
 	beachVerticalBridge2->order = 1;
-	beachVerticalBridge2->Initialize("./models/beachVerticalBridge2.obj", "./models/arch.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	beachVerticalBridge2->Initialize("./models/beachVerticalBridge2.obj", "./models/beachVerticalBridge2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * block1 = new Gengar();
 	block1->order = 1;
-	block1->Initialize("./models/block1.obj", "./textures/forestWall.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	block1->Initialize("./models/block1.obj", "./models/block1.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * block2L = new Gengar();
 	block2L->order = 1;
-	block2L->Initialize("./models/block2L.obj", "./textures/explosion.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	block2L->Initialize("./models/block2L.obj", "./models/block2L.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	Gengar * block2R = new Gengar();
 	block2R->order = 1;
-	block2R->Initialize("./models/block2R.obj", "./textures/floorPattern.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
-
-	Gengar * block4 = new Gengar();
-	block4->order = 1;
-	block4->Initialize("./models/block4Corner.obj", "./textures/floorPattern.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
-
-	Gengar * block4Right = new Gengar();
-	block4Right->order = 1;
-	block4Right->Initialize("./models/block4CornerRight.obj", "./textures/explosion.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	block2R->Initialize("./models/block2R.obj", "./models/block2R.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	int myInt = 30;
 char *chars = reinterpret_cast<char*>(&myInt);
@@ -90,13 +98,13 @@ char *chars = reinterpret_cast<char*>(&myInt);
 			}
 			else if(i==32 && j==0){ //Need different texture
 				cityBlocksRotations.push_back(90.f);
-				cityBlocks.push_back(beachCorner);
+				cityBlocks.push_back(beachCornerPlains);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==32 && j==7){ //Need different texture
 				cityBlocksRotations.push_back(180.f);
-				cityBlocks.push_back(beachCorner);
+				cityBlocks.push_back(beachCornerPlains2);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
@@ -107,10 +115,18 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
 			else if(i==32 && (j>0 && j<7)){ //Need different texture
-				cityBlocksRotations.push_back(180.f);
-				cityBlocks.push_back(beachHorizontal);
-				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
-				cityBlocksDimensions2.push_back(tmpDim);
+				if(j == 4){
+					cityBlocksRotations.push_back(180.f);
+					cityBlocks.push_back(beachHorizontalPlainsHighway);
+					tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+					cityBlocksDimensions2.push_back(tmpDim);
+				}
+				else{
+					cityBlocksRotations.push_back(180.f);
+					cityBlocks.push_back(beachHorizontalPlains);
+					tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
+					cityBlocksDimensions2.push_back(tmpDim);
+				}
 			}
 			else if(i==0 && j==7){
 				cityBlocksRotations.push_back(-90.f);
