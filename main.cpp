@@ -94,7 +94,7 @@ bool ePressed, wPressed, rPressed, zPressed, qPressed, aPressed, sPressed, dPres
 
 //Values defining the position/rotation of the camera.
 double RotatedX = 0;double RotatedY = 0;
-float transX = 0;float transY = 0;float transZ = -9000;
+float transX = -3000;float transY = 0;float transZ = -14000;
 
 //Used to provide an angle for the snow falling when the user is moving
 float movingWRTSnow = 0;

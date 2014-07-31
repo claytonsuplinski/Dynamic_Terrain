@@ -49,6 +49,7 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 
 	glEnable(GL_DEPTH_TEST);
 
+
 	if(userPosition.x > -14238){
 	city->userPosition = userPosition * vec3(-1, 1, -1);
 	city->userRotation = userRotation;
@@ -77,6 +78,33 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	mountainsOffset = translate(mountainsOffset, vec3(9120.5,0,20664));
 	mountains->Draw(projection, mountainsOffset, size, 0);
 
+
+
+
+	/*
+	if(userPosition.x > -6720 && userPosition.x < 0 && userPosition.z > -9204 && userPosition.z < 0){
+
+		for(int i=0; i<city->cityLength; i++){
+			for(int j=0; j<city->cityWidth; j++){
+				if(abs(userPosition.x + city->cityBlocksPositions.at(i*city->cityWidth + j).x) < 537
+						&& abs(userPosition.z + city->cityBlocksPositions.at(i*city->cityWidth + j).z) < 144){
+							cout << "user on city" << endl;
+				}
+			}
+		}
+		//select the current block you're on (or bridge)
+		//use the vertices in that gengar
+
+		//first go through all vertices - if the vertex is within 1074/2, keep it (push back its index in a vector)
+		//go through all the faces and keep the ones that contain the vertices from above (push back the index of the face)
+		//go through the remaining faces and check each triangle to see if it contains the user
+		//use the y-values of the 3 points on the resulting face to get the user's altitude
+
+	}
+	else{
+		cout << "user not on city" << endl;
+	}
+	*/
 
 	
 

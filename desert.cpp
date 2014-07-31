@@ -16,11 +16,11 @@ bool Desert::Initialize()
 
 	terrain = new Gengar();
 	terrain->order = 1;
-	terrain->Initialize("./models/terrain/desert1.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	terrain->Initialize("./models/terrain/desert1.obj", "./models/terrain/desert1.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	terrain2 = new Gengar();
 	terrain2->order = 1;
-	terrain2->Initialize("./models/terrain/desert2.obj", "./textures/floorPatternDesert.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	terrain2->Initialize("./models/terrain/desert2.obj", "./models/terrain/desert2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 	
 	if (this->GLReturnedError("Desert::Initialize - on exit"))
 		return false;
