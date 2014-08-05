@@ -22,6 +22,9 @@ public:
 
 	Gengar * person;
 
+	float velocity;
+	float prevTime, currTime;
+
 private:
 	typedef Object super;
 };

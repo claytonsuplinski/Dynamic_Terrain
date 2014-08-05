@@ -131,6 +131,12 @@
     <ClInclude Include="mountains.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="environmentObject.h">
+      <Filter>Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="bigCity.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -240,6 +246,12 @@
       <Filter>Environments</Filter>
     </ClCompile>
     <ClCompile Include="mountains.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="environmentObject.cpp">
+      <Filter>Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="bigCity.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>

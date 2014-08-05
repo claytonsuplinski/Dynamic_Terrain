@@ -343,7 +343,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 					bool tryLandmark = true;
 					while(buildingFits){
 						if(tryLandmark){
-							randomizedBuilding = rand() % (building->dimensions.size()-2) + 2;
+							randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
 						}
 						else{
 							randomizedBuilding = rand() % (building->dimensions.size()-5) + 5;
@@ -456,7 +456,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 		float absDistX = abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x);
 		float absDistZ = abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z);
 
-		if(absDistX < 7000 && absDistZ < 7000){
+		if(absDistX < 3500 && absDistZ < 3500){
 
 			if(absDistX < 400 && absDistZ < 400
 				|| cityBlocksBuildings.at(i) < 5){

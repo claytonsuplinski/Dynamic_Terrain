@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bigCity.h" />
     <ClInclude Include="building.h" />
     <ClInclude Include="city.h" />
     <ClInclude Include="cube.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="cylinder2.h" />
     <ClInclude Include="desert.h" />
     <ClInclude Include="disc.h" />
+    <ClInclude Include="environmentObject.h" />
     <ClInclude Include="fbo.h" />
     <ClInclude Include="forest.h" />
     <ClInclude Include="gengar.h" />
@@ -115,6 +117,7 @@
     <ClInclude Include="vertexattributes2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bigCity.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="city.cpp" />
     <ClCompile Include="cube.cpp" />
@@ -124,6 +127,7 @@
     <ClCompile Include="cylinder2.cpp" />
     <ClCompile Include="desert.cpp" />
     <ClCompile Include="disc.cpp" />
+    <ClCompile Include="environmentObject.cpp" />
     <ClCompile Include="fbo.cpp" />
     <ClCompile Include="forest.cpp" />
     <ClCompile Include="gengar.cpp" />

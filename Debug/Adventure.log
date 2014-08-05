@@ -1,14 +1,15 @@
-﻿Build started 7/30/2014 9:27:08 PM.
+﻿Build started 8/3/2014 11:00:46 PM.
      1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt plains.cpp
-         plains.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt mountains.cpp
+         mountains.cpp
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\objs" /LIBPATH:"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\lib" /LIBPATH:"C:\Program Files (x86)\Common Files\FreeImage\Source\FreeImageLib" /LIBPATH:"C:\Program Files (x86)\Common Files\freeglut\lib" freetype2411_D.lib glew32.lib FreeImage.lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Adventure.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.lib" /MACHINE:X86 Debug\Adventure.exe.embed.manifest.res
+         Debug\bigCity.obj
          Debug\building.obj
          Debug\city.obj
          Debug\cube.obj
@@ -18,6 +19,7 @@
          Debug\cylinder2.obj
          Debug\desert.obj
          Debug\disc.obj
+         Debug\environmentObject.obj
          Debug\fbo.obj
          Debug\forest.obj
          Debug\gengar.obj
@@ -59,4 +61,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.21
+Time Elapsed 00:00:04.40

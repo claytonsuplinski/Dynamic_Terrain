@@ -16,7 +16,7 @@ bool Mountains::Initialize()
 
 	terrain = new Gengar();
 	terrain->order = 1;
-	terrain->Initialize("./models/terrain/mountains1.obj", "./textures/floorPattern.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	terrain->Initialize("./models/terrain/mountains1.obj", "./models/terrain/mountains1.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	terrain2 = new Gengar();
 	terrain2->order = 1;

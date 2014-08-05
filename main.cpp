@@ -425,23 +425,26 @@ void keyPress(){
 	}
 
 	if(wPressed){
-		maxUserVelocity = 20.f;
 
-		if(velocity2 < maxUserVelocity){velocity2 += 0.1f;}
-		if(movingWRTSnow < 1){movingWRTSnow = movingWRTSnow + 0.2f;}
-		transZ = (float)(transZ + velocity2*cos(-RotatedY*3.14/180));
-		transX = (float)(transX + velocity2*sin(-RotatedY*3.14/180));			
+		/*maxUserVelocity = 322.f; // 220fps = 150mph; 322fps = 220mph
+
+		if(user.velocity < maxUserVelocity){user.velocity += 3.f;}
+		if(user.velocity > maxUserVelocity){user.velocity = maxUserVelocity;}*/
+		//if(movingWRTSnow < 1){movingWRTSnow = movingWRTSnow + 0.2f;}	
+		transZ = (float)(transZ + 20*cos(-RotatedY*3.14/180));
+		transX = (float)(transX + 20*sin(-RotatedY*3.14/180));
 	}
 	else{
-		if(velocity2 > 0){velocity2 -= 0.1f;}
-		if(velocity2 < 0){velocity2 = 0;}
+		if(user.velocity > 0){user.velocity -= 2.f;}
+		if(user.velocity < 0){user.velocity = 0;}
 	}
 
 //	userTeam->soldiers[0].person.velocity = velocity2;
 
 	if(zPressed){transY = transY - 10;}
 	if(qPressed){transY = transY + 10;}
-	if(sPressed){transZ = (float)(transZ - 10*cos(-RotatedY*3.14/180));transX = (float)(transX - 10*sin(-RotatedY*3.14/180));}
+	if(sPressed){transZ = (float)(transZ - 20*cos(-RotatedY*3.14/180));
+		transX = (float)(transX - 20*sin(-RotatedY*3.14/180));}//user.velocity -= 5.f;if(user.velocity < 0){user.velocity = 0;}}
 	if(aPressed){transX = (float)(transX + 10*cos(RotatedY*3.14/180));transZ = (float)(transZ + 10*sin(RotatedY*3.14/180));}
 	if(dPressed){transX = (float)(transX - 10*cos(RotatedY*3.14/180));transZ = (float)(transZ - 10*sin(RotatedY*3.14/180));}
 }
@@ -465,8 +468,10 @@ void GameDisplay(){
 	glLoadMatrixf(value_ptr(modelview));
 	glPolygonMode(GL_FRONT_AND_BACK, window.wireframe ? GL_LINE : GL_FILL);	
 
-	lookAtEye = menu.s.lookAtEye;
-	lookAtCenter = menu.s.lookAtCenter;
+	//lookAtEye = menu.s.lookAtEye;
+	//lookAtCenter = menu.s.lookAtCenter;
+	lookAtEye = vec3(0.0f, 6, 30);
+	lookAtCenter = vec3(0.0f, 5.0f, 0.0f);	
 	viewPerspective = 3;
 	if(lookAtEye == menu.FIRST_PERSON_EYE){
 		viewPerspective = 1;
@@ -477,8 +482,8 @@ void GameDisplay(){
 		//3P - eye = vec3(0.0f, 1, 10);center = vec3(0.0f, 0.0f, 0.0f);
 		//1P - eye = vec3(0.0f, 1, -2);center = vec3(0.0f, 1.0f, -3.0f);
 		viewPerspective = 3;
-		lookAtEye = vec3(0.0f, 2, 10);
-		lookAtCenter = vec3(0.0f, 1.0f, -10.0f);		
+		lookAtEye = vec3(0.0f, 6, 10);
+		lookAtCenter = vec3(0.0f, 0.0f, 0.0f);		
 
 		glDepthMask(GL_FALSE);
 		for(unsigned int i=0; i<menu.titles.size(); i++){
@@ -501,7 +506,12 @@ void GameDisplay(){
 		current_timeDisplay = float(glutGet(GLUT_ELAPSED_TIME)) / 1000.0f;
 		current_timeDisplay = (window.paused ? window.time_last_pause_began : current_timeDisplay) - window.total_time_paused;
 
+		user.currTime = current_timeDisplay;
 		keyPress();		
+		float userMovementMagnitude = (user.currTime - user.prevTime)*user.velocity;
+		transZ = (float)(transZ + userMovementMagnitude*cos(-RotatedY*3.14/180));
+		transX = (float)(transX + userMovementMagnitude*sin(-RotatedY*3.14/180));
+		user.prevTime = current_timeDisplay;
 		
 		//Mouse movement
 		mouseRotations(1, viewPerspective);		
