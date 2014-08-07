@@ -11,6 +11,8 @@ Project: First-Person Shooter
 #include "desert.h"
 #include "plains.h"
 #include "mountains.h"
+#include "bigCity.h"
+#include "environmentObject.h"
 
 using namespace std;
 using namespace glm;
@@ -29,6 +31,9 @@ public:
 	Desert * desert;
 	Plains * plains;
 	Mountains * mountains;
+	BigCity * bigCity;
+
+	EnvironmentObject * environmentObject;
 
 	vec3 userPosition;float userRotation;
 

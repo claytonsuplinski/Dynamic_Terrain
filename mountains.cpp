@@ -20,7 +20,7 @@ bool Mountains::Initialize()
 
 	terrain2 = new Gengar();
 	terrain2->order = 1;
-	terrain2->Initialize("./models/terrain/mountains2.obj", "./textures/floorPattern.jpg", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	terrain2->Initialize("./models/terrain/mountains2.obj", "./models/terrain/mountains2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 	
 	if (this->GLReturnedError("Mountains::Initialize - on exit"))
 		return false;

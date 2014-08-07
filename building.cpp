@@ -44,7 +44,12 @@ bool Building::Initialize()
 		tmpGengar->order = 1;
 		string filename = "./models/buildings/" + filenames.at(i) + ".obj";
 		string texturename = "./models/buildings/" + filenames.at(i) + ".png";
+		if(i < 2){
 		tmpGengar->Initialize(filename.c_str(), texturename.c_str(), "basic_texture_shader.vert", "basic_texture_shader.frag");
+		}
+		else{
+			tmpGengar->Initialize(filename.c_str(), texturename.c_str(), "basic_texture_shader.vert", "basic_texture_shader_city.frag");
+		}
 		buildings.push_back(tmpGengar);
 	}
 

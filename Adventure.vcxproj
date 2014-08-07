@@ -163,6 +163,7 @@
     <None Include="basic_texture_shader.frag" />
     <None Include="basic_texture_shader.vert" />
     <None Include="basic_texture_shader2.frag" />
+    <None Include="basic_texture_shader_city.frag" />
     <None Include="basic_texture_shader_ocean.frag" />
     <None Include="jumbotronShader.frag" />
     <None Include="jumbotronShader.vert" />

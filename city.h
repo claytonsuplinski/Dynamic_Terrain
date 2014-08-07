@@ -9,6 +9,7 @@ Project: First-Person Shooter
 #include "gengar.h"
 #include "building.h"
 #include <fstream>
+#include "environmentObject.h"
 
 using namespace std;
 using namespace glm;
@@ -49,6 +50,11 @@ public:
 	vector<int> cityBlocksBuildings;
 	vector<vec3> cityBlocksBuildingsPositions;
 	vector<float> cityBlocksBuildingsRotations;
+
+	EnvironmentObject* environmentObject;
+	vector<int> environmentObjectIndices;
+	vector<int> blocksWithStoplights;
+	vector<vec3> environmentObjectsPositions;
 
 	int currBuilding;
 	vec3 currBuildingPosition;

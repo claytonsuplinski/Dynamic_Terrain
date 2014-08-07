@@ -38,8 +38,8 @@ void main()
 	vec3 finalColor = ads();
 
 	float dist1 = abs( Position.z );
-	float fogFactor = (3000.0f - dist1) /
-	(3000.0f - 0.5f);
+	float fogFactor = (5000.0f - dist1) /
+	(5000.0f - 0.5f);
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );
 
 	vec3 fogColor = vec3(0.1f, 0.1f, 0.1f);

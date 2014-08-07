@@ -172,6 +172,7 @@ char *chars = reinterpret_cast<char*>(&myInt);
 			else{
 				cityBlocksRotations.push_back(0.f);
 				cityBlocks.push_back(block1);
+				blocksWithStoplights.push_back(i*cityWidth + j);
 				tmpDim.ul = vec2(-519,126);tmpDim.dl = vec2(-519,-126);tmpDim.ur = vec2(519,126);tmpDim.dr = vec2(519,-126);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
@@ -216,6 +217,11 @@ char *chars = reinterpret_cast<char*>(&myInt);
 		}
 	}
 	
+	
+	/*for(int i=0; i<1000; i++){
+		environmentObjectsPositions.push_back(vec3(rand() % 1000 + 1, 0, rand() % 1000 + 1));
+	}*/
+
 	if (this->GLReturnedError("City::Initialize - on exit"))
 		return false;
 
@@ -251,6 +257,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 	float lengthOffset = 0;
 	float widthOffset = 0;
 	float waterWidthOffset = 0;
+	int blocksWithStoplightsIndex = 0;
 	for(int i=0; i<cityLength; i++){
 		for(int j=0; j<cityWidth; j++){
 			widthOffset += this->cityBlocksDimensions.at(i*cityWidth + j).width/2;
@@ -404,6 +411,22 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 				}
 			}
 
+			if(blocksWithStoplightsIndex < blocksWithStoplights.size()){
+				if(i*cityWidth + j == blocksWithStoplights.at(blocksWithStoplightsIndex)){
+				environmentObjectIndices.push_back(0);
+				/*environmentObjectsPositions.push_back(vec3(widthOffset - 523, 0.5, lengthOffset - 129));
+				environmentObjectIndices.push_back(0);
+				environmentObjectsPositions.push_back(vec3(widthOffset - 523, 0.5, lengthOffset + 129));
+				environmentObjectIndices.push_back(0);
+				environmentObjectsPositions.push_back(vec3(widthOffset + 523, 0.5, lengthOffset - 129));
+				environmentObjectIndices.push_back(0);*/
+				environmentObjectsPositions.push_back(vec3(widthOffset + 523, 0.5, lengthOffset + 129));
+				blocksWithStoplightsIndex++;
+				environmentObjectIndices.push_back(0);
+				environmentObjectsPositions.push_back(vec3(widthOffset - 523, 0.5, lengthOffset + 129));
+				}
+			}
+
 			lengthOffset -= this->cityBlocksDimensions.at(i*cityWidth + j).length/2;
 			widthOffset += this->cityBlocksDimensions.at(i*cityWidth + j).width/2;
 
@@ -456,7 +479,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 		float absDistX = abs(userPosition.x - cityBlocksBuildingsPositions.at(i).x);
 		float absDistZ = abs(userPosition.z - cityBlocksBuildingsPositions.at(i).z);
 
-		if(absDistX < 3500 && absDistZ < 3500){
+		if(absDistX < 6500 && absDistZ < 6500){
 
 			if(absDistX < 400 && absDistZ < 400
 				|| cityBlocksBuildings.at(i) < 5){
@@ -471,7 +494,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 					//Forget frustum, just draw buildings along the lines
 	
 					if(modUserRot < 135 && modUserRot > 45){
-						if(absDistZ < 500 && absDistX < 3500){
+						if(absDistZ < 400 && absDistX < 3500){
 							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 							building->buildingIndex = cityBlocksBuildings.at(i);
@@ -479,7 +502,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 						}
 					}
 					else{
-						if(absDistX < 500  && absDistZ < 3500){
+						if(absDistX < 400  && absDistZ < 3500){
 							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 							building->buildingIndex = cityBlocksBuildings.at(i);
@@ -490,11 +513,16 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 				}
 				else{ //outside the city
 					//stop using frustum, only draw a certain range along the city boundary and all those in a line with the user
+
+					float buildingClippingDistance = 3000;
+					if(building->dimensions.at(cityBlocksBuildings.at(i)).y > 400){
+						buildingClippingDistance = 6500;
+					}
 					
 					//(userPosition.x > 150 && userPosition.x < 6560 && userPosition.z > 150 && userPosition.z < 9054)
 					bool alreadyDrawn = false;
 					if(userPosition.x <= 150){
-						if(cityBlocksBuildingsPositions.at(i).x < 550 || (absDistZ < 500 && absDistX < 3000)){
+						if(cityBlocksBuildingsPositions.at(i).x < 550 || (absDistZ < 500 && absDistX < buildingClippingDistance)){
 							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 							building->buildingIndex = cityBlocksBuildings.at(i);
@@ -503,7 +531,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 						}
 					}
 					else if(userPosition.x >= 6560){
-						if(cityBlocksBuildingsPositions.at(i).x > 6160 || (absDistZ < 500 && absDistX < 3000)){
+						if(cityBlocksBuildingsPositions.at(i).x > 6160 || (absDistZ < 500 && absDistX < buildingClippingDistance)){
 							buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 							buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 							building->buildingIndex = cityBlocksBuildings.at(i);
@@ -514,7 +542,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 
 					if(!alreadyDrawn){
 						if(userPosition.z <= 150){
-							if(cityBlocksBuildingsPositions.at(i).z < 550 || (absDistX < 500 && absDistZ < 3000)){
+							if(cityBlocksBuildingsPositions.at(i).z < 550 || (absDistX < 500 && absDistZ < buildingClippingDistance)){
 								buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 								buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 								building->buildingIndex = cityBlocksBuildings.at(i);
@@ -522,7 +550,7 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 							}
 						}
 						else if(userPosition.z >= 9054){
-							if(cityBlocksBuildingsPositions.at(i).z > 8654 || (absDistX < 500 && absDistZ < 3000)){
+							if(cityBlocksBuildingsPositions.at(i).z > 8654 || (absDistX < 500 && absDistZ < buildingClippingDistance)){
 								buildingMatrix = translate(modelview, cityBlocksBuildingsPositions.at(i));
 								buildingMatrix = rotate(buildingMatrix, cityBlocksBuildingsRotations.at(i), vec3(0,1,0));
 								building->buildingIndex = cityBlocksBuildings.at(i);
@@ -642,7 +670,27 @@ void City::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, con
 			}
 		}*/
 	}
+
+	mat4 objectMat = modelview;
 	
+	/*
+	for(int i=0; i<environmentObjectIndices.size(); i++){
+		float absDiffX = abs(environmentObjectsPositions.at(i).x - userPosition.x);
+		float absDiffZ = abs(environmentObjectsPositions.at(i).z - userPosition.z);
+		if((absDiffX < 1800 && absDiffZ < 100) 
+			|| (absDiffX < 100 && absDiffZ < 1800)){
+		objectMat = translate(modelview, environmentObjectsPositions.at(i));
+		environmentObject->objectIndex = environmentObjectIndices.at(i);
+		environmentObject->Draw(projection, objectMat, size, time);
+		}
+	}*/
+
+	/*
+	glDepthMask(GL_FALSE);
+		environmentObject->objectIndex = 2;
+		environmentObject->Draw(projection, objectMat, size, time);
+		glDepthMask(GL_TRUE);
+	*/
 
 	if (this->GLReturnedError("City::Draw - on exit")){
 		return;

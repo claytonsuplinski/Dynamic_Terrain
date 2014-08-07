@@ -17,7 +17,7 @@ bool Plains::Initialize()
 	terrain = new Gengar();
 	terrain->order = 1;
 	terrain->Initialize("./models/terrain/plains1.obj", "./models/terrain/plains1.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
-	
+
 	terrain2 = new Gengar();
 	terrain2->order = 1;
 	terrain2->Initialize("./models/terrain/plains2.obj", "./models/terrain/plains2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");

@@ -17,6 +17,23 @@ bool Forest::Initialize()
 	terrain = new Gengar();
 	terrain->order = 1;
 	terrain->Initialize("./models/terrain/forest.obj", "./models/terrain/forest.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+
+	vector<vector<vec3>> terrainFaces;
+
+	for(int i=0; i<terrain->gengar_faces.size()-9; i+=9){
+		vector<vec3> tmpTerrainFace;
+		tmpTerrainFace.push_back(vec3(terrain->gengar_vertices.at(terrain->gengar_faces.at(i)-1)));
+		tmpTerrainFace.push_back(vec3(terrain->gengar_vertices.at(terrain->gengar_faces.at(i+3)-1)));
+		tmpTerrainFace.push_back(vec3(terrain->gengar_vertices.at(terrain->gengar_faces.at(i+6)-1)));
+		terrainFaces.push_back(tmpTerrainFace);
+	}
+
+	for(int i=0; i<1000; i++){
+		
+		//cout << terrain->gengar_faces.at(0) << endl;
+		environmentObjectIndices.push_back(1);
+		environmentObjectsPositions.push_back(vec3(rand() % 8000 - 4000, 0, rand() % 10000 -5000));
+	}
 	
 	if (this->GLReturnedError("Forest::Initialize - on exit"))
 		return false;
@@ -33,6 +50,17 @@ void Forest::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, c
 	}
 	
 	terrain->Draw(projection, modelview, size, time);
+
+	mat4 objectMat = modelview;
+	for(int i=0; i<environmentObjectIndices.size(); i++){
+		/*float absDiffX = abs(environmentObjectsPositions.at(i).x - userPosition.x);
+		float absDiffZ = abs(environmentObjectsPositions.at(i).z - userPosition.z);
+		if(absDiffX < 1800 && absDiffZ < 1800){*/
+		objectMat = translate(modelview, environmentObjectsPositions.at(i));
+		environmentObject->objectIndex = environmentObjectIndices.at(i);
+		environmentObject->Draw(projection, objectMat, size, time);
+		//}
+	}
 
 	if (this->GLReturnedError("Forest::Draw - on exit")){
 		return;

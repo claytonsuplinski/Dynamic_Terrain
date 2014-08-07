@@ -7,6 +7,7 @@ Project: First-Person Shooter
 #include "object.h"
 #include "shader.h"
 #include "gengar.h"
+#include "environmentObject.h"
 
 using namespace std;
 using namespace glm;
@@ -21,6 +22,10 @@ public:
 	void TakeDown();
 
 	Gengar * terrain;
+
+	EnvironmentObject* environmentObject;
+	vector<int> environmentObjectIndices;
+	vector<vec3> environmentObjectsPositions;
 
 	bool buildingInFront(int buildingIndex, float distance, float angleOffset, float buffer);
 	bool linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2);

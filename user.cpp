@@ -16,7 +16,7 @@ bool User::Initialize()
 
 	person = new Gengar();
 	person->order = 1;
-	person->Initialize("./models/objects/car1.obj", "./models/soldier.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
+	person->Initialize("./models/objects/car1.obj", "./models/objects/stopLight.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	velocity = 0;
 	prevTime = 0;currTime = 0;

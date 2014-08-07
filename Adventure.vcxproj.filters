@@ -307,5 +307,8 @@
     <None Include="basic_texture_shader_ocean.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="basic_texture_shader_city.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

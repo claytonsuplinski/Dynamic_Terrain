@@ -1,10 +1,12 @@
-﻿Build started 8/3/2014 11:00:46 PM.
+﻿Build started 8/6/2014 10:17:04 PM.
      1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt mountains.cpp
-         mountains.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt forest.cpp
+         forest.cpp
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\forest.cpp(23): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\forest.cpp(55): warning C4018: '<' : signed/unsigned mismatch
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -61,4 +63,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.40
+Time Elapsed 00:00:01.71
