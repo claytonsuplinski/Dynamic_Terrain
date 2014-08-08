@@ -29,10 +29,28 @@ bool Forest::Initialize()
 	}
 
 	for(int i=0; i<1000; i++){
-		
-		//cout << terrain->gengar_faces.at(0) << endl;
+		float tmpTreeX = rand() % 8000 - 4000;
+		float tmpTreeZ = rand() % 10000 -5000;
+		float tmpTreeY = 0;
+		bool placeTheTree = false;
+		for(int j=0; j<terrainFaces.size(); j++){
+			if(PointInTriangle(vec2(tmpTreeX, tmpTreeZ), 
+				vec2(terrainFaces.at(j).at(0).x, terrainFaces.at(j).at(0).z), 
+				vec2(terrainFaces.at(j).at(1).x, terrainFaces.at(j).at(1).z), 
+				vec2(terrainFaces.at(j).at(2).x, terrainFaces.at(j).at(2).z))){
+					vec3 currTreePoint = vec3(tmpTreeX, 0, tmpTreeZ);
+					vec3 crossOfFace = cross(terrainFaces.at(j).at(0)-terrainFaces.at(j).at(2), terrainFaces.at(j).at(1)-terrainFaces.at(j).at(2));
+					float crossOfFaceOffset = -dot(crossOfFace, terrainFaces.at(j).at(0));
+					tmpTreeY = -(crossOfFace.x * tmpTreeX + crossOfFace.z * tmpTreeZ + crossOfFaceOffset)/crossOfFace.y;
+					j+=terrainFaces.size()+5;
+					placeTheTree = true;
+			}
+		}
+
+		if(placeTheTree){
 		environmentObjectIndices.push_back(1);
-		environmentObjectsPositions.push_back(vec3(rand() % 8000 - 4000, 0, rand() % 10000 -5000));
+		environmentObjectsPositions.push_back(vec3(tmpTreeX, tmpTreeY, tmpTreeZ));
+		}
 	}
 	
 	if (this->GLReturnedError("Forest::Initialize - on exit"))
@@ -103,5 +121,28 @@ bool Forest::CCW(vec2 C, vec2 W1, vec2 W2){
 
 bool Forest::linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2){
 	return (CCW(a1, b1, b2) != CCW(a2, b1, b2)) && (CCW(b1, a1, a2) != CCW(b2, a1, a2));
+}
+
+float Forest::dist(vec3 p1, vec3 p2){
+	float a = p1.x-p2.x;
+	float b = p1.y-p2.y;
+	float c = p1.z-p2.z;
+	return sqrt(a*a + b*b + c*c);
+}
+
+float Forest::sign(vec2 p1, vec2 p2, vec2 p3)
+{
+  return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
+
+bool Forest::PointInTriangle(vec2 pt, vec2 v1, vec2 v2, vec2 v3)
+{
+  bool b1, b2, b3;
+
+  b1 = sign(pt, v1, v2) < 0.0f;
+  b2 = sign(pt, v2, v3) < 0.0f;
+  b3 = sign(pt, v3, v1) < 0.0f;
+
+  return ((b1 == b2) && (b2 == b3));
 }
 
