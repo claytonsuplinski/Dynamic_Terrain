@@ -19,6 +19,7 @@ bool Forest::Initialize()
 	terrain->Initialize("./models/terrain/forest.obj", "./models/terrain/forest.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 
 	vector<vector<vec3>> terrainFaces;
+	vector<vector<vec3>> roadTerrainFaces;
 
 	for(int i=0; i<terrain->gengar_faces.size()-9; i+=9){
 		vector<vec3> tmpTerrainFace;
@@ -26,25 +27,49 @@ bool Forest::Initialize()
 		tmpTerrainFace.push_back(vec3(terrain->gengar_vertices.at(terrain->gengar_faces.at(i+3)-1)));
 		tmpTerrainFace.push_back(vec3(terrain->gengar_vertices.at(terrain->gengar_faces.at(i+6)-1)));
 		terrainFaces.push_back(tmpTerrainFace);
+
+		if((tmpTerrainFace.at(0).y == 30 && tmpTerrainFace.at(1).y == 30 && tmpTerrainFace.at(2).y == 30)
+			|| (tmpTerrainFace.at(0).y == 30.5 && tmpTerrainFace.at(1).y == 30.5 && tmpTerrainFace.at(2).y == 30.5)
+			|| (tmpTerrainFace.at(0).y == 20 && tmpTerrainFace.at(1).y == 20 && tmpTerrainFace.at(2).y == 20)){
+				roadTerrainFaces.push_back(tmpTerrainFace);
+		}
 	}
 
-	for(int i=0; i<1000; i++){
+	for(int i=0; i<4000; i++){
 		float tmpTreeX = rand() % 8000 - 4000;
 		float tmpTreeZ = rand() % 10000 -5000;
 		float tmpTreeY = 0;
 		bool placeTheTree = false;
 		for(int j=0; j<terrainFaces.size(); j++){
-			if(PointInTriangle(vec2(tmpTreeX, tmpTreeZ), 
-				vec2(terrainFaces.at(j).at(0).x, terrainFaces.at(j).at(0).z), 
-				vec2(terrainFaces.at(j).at(1).x, terrainFaces.at(j).at(1).z), 
-				vec2(terrainFaces.at(j).at(2).x, terrainFaces.at(j).at(2).z))){
-					vec3 currTreePoint = vec3(tmpTreeX, 0, tmpTreeZ);
-					vec3 crossOfFace = cross(terrainFaces.at(j).at(0)-terrainFaces.at(j).at(2), terrainFaces.at(j).at(1)-terrainFaces.at(j).at(2));
-					float crossOfFaceOffset = -dot(crossOfFace, terrainFaces.at(j).at(0));
-					tmpTreeY = -(crossOfFace.x * tmpTreeX + crossOfFace.z * tmpTreeZ + crossOfFaceOffset)/crossOfFace.y;
-					j+=terrainFaces.size()+5;
-					placeTheTree = true;
-			}
+			
+				if(PointInTriangle(vec2(tmpTreeX, tmpTreeZ), 
+					vec2(terrainFaces.at(j).at(0).x, terrainFaces.at(j).at(0).z), 
+					vec2(terrainFaces.at(j).at(1).x, terrainFaces.at(j).at(1).z), 
+					vec2(terrainFaces.at(j).at(2).x, terrainFaces.at(j).at(2).z))){
+
+						bool treeOnRoad = false;
+						for(int k=0; k<roadTerrainFaces.size(); k++){
+							if((abs(tmpTreeX-roadTerrainFaces.at(k).at(0).x) < 100 && abs(tmpTreeZ-roadTerrainFaces.at(k).at(0).z) < 100)
+								|| (abs(tmpTreeX-roadTerrainFaces.at(k).at(1).x) < 100 && abs(tmpTreeZ-roadTerrainFaces.at(k).at(1).z) < 100)
+								|| (abs(tmpTreeX-roadTerrainFaces.at(k).at(2).x) < 100 && abs(tmpTreeZ-roadTerrainFaces.at(k).at(2).z) < 100)){
+								treeOnRoad = true;
+								k+=roadTerrainFaces.size()+5;
+							}
+						}
+
+						if(!treeOnRoad){
+						vec3 currTreePoint = vec3(tmpTreeX, 0, tmpTreeZ);
+						vec3 crossOfFace = cross(terrainFaces.at(j).at(0)-terrainFaces.at(j).at(2), terrainFaces.at(j).at(1)-terrainFaces.at(j).at(2));
+						float crossOfFaceOffset = -dot(crossOfFace, terrainFaces.at(j).at(0));
+						tmpTreeY = -(crossOfFace.x * tmpTreeX + crossOfFace.z * tmpTreeZ + crossOfFaceOffset)/crossOfFace.y;
+					
+							tmpTreeY-=1;
+							
+							placeTheTree = true;
+						}
+						j+=terrainFaces.size()+5;
+				}
+			
 		}
 
 		if(placeTheTree){
@@ -70,14 +95,19 @@ void Forest::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, c
 	terrain->Draw(projection, modelview, size, time);
 
 	mat4 objectMat = modelview;
+	float objectClippingDistanceX = 3000;float objectClippingDistanceZ = 3000;
+	float absUserX = abs(userPosition.x);float absUserZ = abs(userPosition.z);
+	bool expandX = absUserX > 4000;bool expandZ = absUserZ > 5000;
+	if(expandX || expandZ){objectClippingDistanceX=5000;objectClippingDistanceZ=5000;}
+	
 	for(int i=0; i<environmentObjectIndices.size(); i++){
-		/*float absDiffX = abs(environmentObjectsPositions.at(i).x - userPosition.x);
+		float absDiffX = abs(environmentObjectsPositions.at(i).x - userPosition.x);
 		float absDiffZ = abs(environmentObjectsPositions.at(i).z - userPosition.z);
-		if(absDiffX < 1800 && absDiffZ < 1800){*/
+		if(absDiffX < objectClippingDistanceX && absDiffZ < objectClippingDistanceZ){
 		objectMat = translate(modelview, environmentObjectsPositions.at(i));
 		environmentObject->objectIndex = environmentObjectIndices.at(i);
 		environmentObject->Draw(projection, objectMat, size, time);
-		//}
+		}
 	}
 
 	if (this->GLReturnedError("Forest::Draw - on exit")){

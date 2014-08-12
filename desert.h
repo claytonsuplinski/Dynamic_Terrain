@@ -7,6 +7,7 @@ Project: First-Person Shooter
 #include "object.h"
 #include "shader.h"
 #include "gengar.h"
+#include "environmentObject.h"
 
 using namespace std;
 using namespace glm;
@@ -27,6 +28,13 @@ public:
 	bool CCW(vec2 C, vec2 W1, vec2 W2);
 
 	bool buildingsInitialized;
+
+	EnvironmentObject* environmentObject;
+	vector<int> environmentObjectIndices;
+	vector<vec3> environmentObjectsPositions;
+
+	float sign(vec2 p1, vec2 p2, vec2 p3);
+	bool PointInTriangle(vec2 pt, vec2 v1, vec2 v2, vec2 v3);
 
 	vec3 userPosition;float userRotation;
 

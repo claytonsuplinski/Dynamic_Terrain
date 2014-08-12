@@ -26,6 +26,8 @@ bool TerrainManager::Initialize()
 
 	city->environmentObject = environmentObject;
 	forest->environmentObject = environmentObject;
+	plains->environmentObject = environmentObject;
+	desert->environmentObject = environmentObject;
 
 	city->Initialize();	
 	forest->Initialize();
@@ -68,30 +70,40 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	if(userPosition.x < -5238 && userPosition.z > -14573){
 	mat4 forestOffset = modelview;
 	forestOffset = translate(forestOffset, vec3(14241,0,4389));
+	forest->userPosition = userPosition * vec3(-1, 1, -1) - vec3(14241,0,4389);
+	forest->userRotation = userRotation;
 	forest->Draw(projection, forestOffset, size, 0);
 	}
 
 	if(userPosition.x < -5238 && userPosition.z > -21266 && userPosition.z < -5034){
 	mat4 desertOffset = modelview;
 	desertOffset = translate(desertOffset, vec3(14241,0,11589));
+	desert->userPosition = userPosition * vec3(-1, 1, -1) - vec3(14241,0,11589);
+	desert->userRotation = userRotation;
 	desert->Draw(projection, desertOffset, size, 0);
 	}
 
 	if(userPosition.x > -14238 && userPosition.z > -21266 && userPosition.z < -5369){
 	mat4 plainsOffset = modelview;
 	plainsOffset = translate(plainsOffset, vec3(3360,0,11496.5));
+	plains->userPosition = userPosition * vec3(-1, 1, -1) - vec3(3360,0,11496.5);
+	plains->userRotation = userRotation;
 	plains->Draw(projection, plainsOffset, size, 0);
 	}
 
 	if(userPosition.z < -11345){
 	mat4 mountainsOffset = modelview;
 	mountainsOffset = translate(mountainsOffset, vec3(9120.5,0,20664));
+	mountains->userPosition = userPosition * vec3(-1, 1, -1) - vec3(3360,0,11496.5);
+	mountains->userRotation = userRotation;	
 	mountains->Draw(projection, mountainsOffset, size, 0);
 	}
 
 	if(userPosition.z < -22412){
 	mat4 bigCityOffset = modelview;
 	bigCityOffset = translate(bigCityOffset, vec3(0,0,28188));
+	bigCity->userPosition = userPosition * vec3(-1, 1, -1) - vec3(0,0,28188);
+	bigCity->userRotation = userRotation;
 	bigCity->Draw(projection, bigCityOffset, size, 0);
 	}
 
