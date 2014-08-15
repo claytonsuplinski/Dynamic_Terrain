@@ -20,6 +20,8 @@ public:
 	virtual bool Initialize();
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
 	void TakeDown();
+	void saveBuildingVertices();
+	void initCacti();
 
 	Gengar * terrain, * terrain2;
 
@@ -31,6 +33,7 @@ public:
 
 	EnvironmentObject* environmentObject;
 	vector<int> environmentObjectIndices;
+	vector<float> environmentObjectRotations;
 	vector<vec3> environmentObjectsPositions;
 
 	float sign(vec2 p1, vec2 p2, vec2 p3);

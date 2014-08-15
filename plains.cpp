@@ -38,7 +38,7 @@ bool Plains::Initialize()
 		}
 	}
 
-	for(int i=0; i<5000; i++){
+	for(int i=0; i<6000; i++){
 		float tmpTreeX = rand() % 8000 - 4000;
 		float tmpTreeZ = rand() % 10000 -5000;
 		float tmpTreeY = 0;
@@ -77,6 +77,7 @@ bool Plains::Initialize()
 
 		if(placeTheTree){
 		environmentObjectIndices.push_back(5);
+		environmentObjectRotations.push_back(rand() % 360);
 		environmentObjectsPositions.push_back(vec3(tmpTreeX, tmpTreeY, tmpTreeZ));
 		}
 	}
@@ -88,6 +89,21 @@ bool Plains::Initialize()
 }
 
 void Plains::TakeDown(){super::TakeDown();}
+
+void Plains::saveBuildingVertices(){
+	ofstream outputFile;
+outputFile.open("plainsPositions.txt");
+
+for(int i=0; i<environmentObjectsPositions.size(); i++){
+	outputFile << "environmentObjectIndices.push_back(" << environmentObjectIndices.at(i) 
+		<< ");environmentObjectsPositions.push_back(vec3(" << environmentObjectsPositions.at(i).x << ", " << environmentObjectsPositions.at(i).y << ", "
+		<< environmentObjectsPositions.at(i).z
+		<< "));environmentObjectRotations.push_back(" << environmentObjectRotations.at(i) << ");" << endl;
+}
+
+outputFile.close();
+}
+
 
 void Plains::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, const float time){
 
@@ -103,20 +119,33 @@ void Plains::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, c
 	terrain2->Draw(projection, another, size, time);
 
 	mat4 objectMat = modelview;
-	float objectClippingDistanceX = 3000;float objectClippingDistanceZ = 3000;
+	float objectClippingDistanceX = 4000;float objectClippingDistanceZ = 4000;
 	float absUserX = abs(userPosition.x);float absUserZ = abs(userPosition.z);
-	bool expandX = absUserX > 4000;bool expandZ = absUserZ > 5000;
-	if(expandX || expandZ){objectClippingDistanceX=5000;objectClippingDistanceZ=5000;}
+	bool expandX = absUserX > 5000;bool expandZ = absUserZ > 5000;
+	if(expandX || expandZ){objectClippingDistanceX=4000;objectClippingDistanceZ=4000;}
+	bool outsidePlains = expandX || expandZ;
 	
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
+	environmentObject->objectIndex = environmentObjectIndices.at(0);
 	for(int i=0; i<environmentObjectIndices.size(); i++){
 		float absDiffX = abs(environmentObjectsPositions.at(i).x - userPosition.x);
 		float absDiffZ = abs(environmentObjectsPositions.at(i).z - userPosition.z);
 		if(absDiffX < objectClippingDistanceX && absDiffZ < objectClippingDistanceZ){
-		objectMat = translate(modelview, environmentObjectsPositions.at(i));
-		environmentObject->objectIndex = environmentObjectIndices.at(i);
-		environmentObject->Draw(projection, objectMat, size, time);
+			bool drawGrass = true;
+			if(!outsidePlains){
+				if(environmentObjectsPositions.at(i).y < 10){
+					drawGrass = false;
+					if(absDiffX < 2000 && absDiffZ < 2000){
+						drawGrass = true;
+					}
+				}
+			}
+			if(drawGrass){
+				objectMat = translate(modelview, environmentObjectsPositions.at(i));
+				objectMat = rotate(objectMat, environmentObjectRotations.at(i), vec3(0,1,0));
+				environmentObject->Draw(projection, objectMat, size, time);
+			}
 		}
 	}
 	glDepthMask(GL_TRUE);

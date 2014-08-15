@@ -28,6 +28,7 @@ bool TerrainManager::Initialize()
 	forest->environmentObject = environmentObject;
 	plains->environmentObject = environmentObject;
 	desert->environmentObject = environmentObject;
+	mountains->environmentObject = environmentObject;
 
 	city->Initialize();	
 	forest->Initialize();
@@ -83,14 +84,6 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	desert->Draw(projection, desertOffset, size, 0);
 	}
 
-	if(userPosition.x > -14238 && userPosition.z > -21266 && userPosition.z < -5369){
-	mat4 plainsOffset = modelview;
-	plainsOffset = translate(plainsOffset, vec3(3360,0,11496.5));
-	plains->userPosition = userPosition * vec3(-1, 1, -1) - vec3(3360,0,11496.5);
-	plains->userRotation = userRotation;
-	plains->Draw(projection, plainsOffset, size, 0);
-	}
-
 	if(userPosition.z < -11345){
 	mat4 mountainsOffset = modelview;
 	mountainsOffset = translate(mountainsOffset, vec3(9120.5,0,20664));
@@ -99,6 +92,15 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	mountains->Draw(projection, mountainsOffset, size, 0);
 	}
 
+	if(userPosition.x > -14238 && userPosition.z > -21266 && userPosition.z < -5369){
+	mat4 plainsOffset = modelview;
+	plainsOffset = translate(plainsOffset, vec3(3360,0,11496.5));
+	plains->userPosition = userPosition * vec3(-1, 1, -1) - vec3(3360,0,11496.5);
+	plains->userRotation = userRotation;
+	plains->Draw(projection, plainsOffset, size, 0);
+	}
+
+	/*
 	if(userPosition.z < -22412){
 	mat4 bigCityOffset = modelview;
 	bigCityOffset = translate(bigCityOffset, vec3(0,0,28188));
@@ -106,7 +108,7 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	bigCity->userRotation = userRotation;
 	bigCity->Draw(projection, bigCityOffset, size, 0);
 	}
-
+	*/
 
 
 	/*

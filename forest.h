@@ -20,11 +20,14 @@ public:
 	virtual bool Initialize();
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
 	void TakeDown();
+	void saveBuildingVertices();
+	void initTrees();
 
 	Gengar * terrain;
 
 	EnvironmentObject* environmentObject;
 	vector<int> environmentObjectIndices;
+	vector<float> environmentObjectRotations;
 	vector<vec3> environmentObjectsPositions;
 
 	bool buildingInFront(int buildingIndex, float distance, float angleOffset, float buffer);

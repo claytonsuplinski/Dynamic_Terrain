@@ -1,16 +1,12 @@
-﻿Build started 8/12/2014 2:37:38 PM.
+﻿Build started 8/14/2014 9:14:37 PM.
      1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt plains.cpp
-         plains.cpp
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(28): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(42): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(43): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(46): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(54): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\plains.cpp(113): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt desert.cpp
+         desert.cpp
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\desert.cpp(100): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\desert.cpp(131): warning C4018: '<' : signed/unsigned mismatch
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -67,4 +63,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.93
+Time Elapsed 00:00:01.76

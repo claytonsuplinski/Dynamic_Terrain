@@ -307,6 +307,10 @@ void KeyboardFunc(unsigned char c, int x, int y){
 			}
 			break;*/
 
+		case 'v':
+			terrainManager.desert->saveBuildingVertices();
+			break;
+
 		case 'p': // Pause/unpause
 			if(!menu.menuOn){
 				if (window.paused == true){

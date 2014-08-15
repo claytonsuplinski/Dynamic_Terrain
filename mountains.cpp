@@ -22,6 +22,10 @@ bool Mountains::Initialize()
 	terrain2->order = 1;
 	terrain2->Initialize("./models/terrain/mountains2.obj", "./models/terrain/mountains2.png", "basic_texture_shader.vert", "basic_texture_shader.frag");
 	
+	environmentObjectIndices.push_back(7);
+	environmentObjectRotations.push_back(0);
+	environmentObjectsPositions.push_back(vec3(0, 300, 1237.5));
+	
 	if (this->GLReturnedError("Mountains::Initialize - on exit"))
 		return false;
 
@@ -42,6 +46,15 @@ void Mountains::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size
 
 	another = translate(another, vec3(0,0,5050));
 	terrain2->Draw(projection, another, size, time);
+
+	mat4 objectMat = modelview;
+	
+	for(int i=0; i<environmentObjectIndices.size(); i++){
+		objectMat = translate(modelview, environmentObjectsPositions.at(i));
+		objectMat = rotate(objectMat, environmentObjectRotations.at(i), vec3(0,1,0));
+		environmentObject->objectIndex = environmentObjectIndices.at(i);
+		environmentObject->Draw(projection, objectMat, size, time);
+	}
 
 	if (this->GLReturnedError("Mountains::Draw - on exit")){
 		return;

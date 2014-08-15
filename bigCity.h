@@ -59,8 +59,8 @@ public:
 	vector<blockDimensions> cityBlocksDimensions; //Dimensions of each block
 	vector<blockDimensions> cityBlocksDimensions2;
 	vector<float> cityBlocksRotations;
-	static const int cityLength = 33; //North-south
-	static const int cityWidth = 8; //East-west
+	static const int cityLength = 67; //North-south
+	static const int cityWidth = 16; //East-west
 
 	vector<vector<int>> blocksToDraw; //An array of arrays of indices for blocks to draw while in a certain block
 	int currBlock; //Index of the current block the user is in

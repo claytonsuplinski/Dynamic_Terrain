@@ -96,13 +96,13 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==32 && j==0){ //Need different texture
+			else if(i==66 && j==0){ //Need different texture
 				cityBlocksRotations.push_back(90.f);
 				cityBlocks.push_back(beachCornerPlains);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==32 && j==7){ //Need different texture
+			else if(i==66 && j==7){ //Need different texture
 				cityBlocksRotations.push_back(180.f);
 				cityBlocks.push_back(beachCornerPlains2);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
@@ -114,21 +114,21 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
 			}
-			else if(i==32 && (j>0 && j<7)){ //Need different texture
-				if(j == 4){
+			else if(i==66 && (j>0 && j<7)){ //Need different texture
+				/*if(j == 4){
 					cityBlocksRotations.push_back(180.f);
 					cityBlocks.push_back(beachHorizontalPlainsHighway);
 					tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 					cityBlocksDimensions2.push_back(tmpDim);
 				}
-				else{
+				else{*/
 					cityBlocksRotations.push_back(180.f);
 					cityBlocks.push_back(beachHorizontalPlains);
 					tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 					cityBlocksDimensions2.push_back(tmpDim);
-				}
+				//}
 			}
-			else if(i==0 && j==7){
+			/*else if(i==0 && j==7){
 				cityBlocksRotations.push_back(-90.f);
 				cityBlocks.push_back(beachCornerBridge);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
@@ -145,7 +145,7 @@ char *chars = reinterpret_cast<char*>(&myInt);
 				cityBlocks.push_back(beachVerticalBridge2);
 				tmpDim.ul = vec2(0,0);tmpDim.dl = vec2(0,0);tmpDim.ur = vec2(0,0);tmpDim.dr = vec2(0,0);
 				cityBlocksDimensions2.push_back(tmpDim);
-			}
+			}*/
 			else if(i>0 && (j==0 || j==7)){
 				if(j==7){
 					cityBlocksRotations.push_back(180.f);
