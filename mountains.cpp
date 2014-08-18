@@ -25,6 +25,24 @@ bool Mountains::Initialize()
 	environmentObjectIndices.push_back(7);
 	environmentObjectRotations.push_back(0);
 	environmentObjectsPositions.push_back(vec3(0, 300, 1237.5));
+
+	environmentObjectIndices.push_back(8);
+	environmentObjectRotations.push_back(0);
+	environmentObjectsPositions.push_back(vec3(3000, 300, 1237.5));
+
+	environmentObjectIndices.push_back(9);
+	environmentObjectRotations.push_back(0);
+	environmentObjectsPositions.push_back(vec3(3000, 300, 1037.5));
+
+	for(int i=0; i<300; i++){
+		float tmpTreeX = rand() % 5000 - 3000;
+		float tmpTreeZ = rand() % 2237 - 1200;
+		float tmpTreeY = 300;
+
+		environmentObjectIndices.push_back(10);
+		environmentObjectRotations.push_back(rand() % 360);
+		environmentObjectsPositions.push_back(vec3(tmpTreeX, tmpTreeY, tmpTreeZ));
+	}
 	
 	if (this->GLReturnedError("Mountains::Initialize - on exit"))
 		return false;

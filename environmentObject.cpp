@@ -25,6 +25,9 @@ bool EnvironmentObject::Initialize()
 	filenames.push_back("grassClump");dimensions.push_back(vec3(99999999, 99999999, 99999999));
 	filenames.push_back("tree");dimensions.push_back(vec3(99999999, 99999999, 99999999));
 	filenames.push_back("boundingFence");dimensions.push_back(vec3(99999999, 99999999, 99999999));
+	filenames.push_back("barn");dimensions.push_back(vec3(99999999, 99999999, 99999999));
+	filenames.push_back("silo");dimensions.push_back(vec3(99999999, 99999999, 99999999));
+	filenames.push_back("cow");dimensions.push_back(vec3(99999999, 99999999, 99999999));
 
 	for(unsigned int i=0; i<filenames.size(); i++){
 		tmpGengar = new Gengar();
