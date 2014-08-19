@@ -28,15 +28,25 @@ bool Mountains::Initialize()
 
 	environmentObjectIndices.push_back(8);
 	environmentObjectRotations.push_back(0);
-	environmentObjectsPositions.push_back(vec3(3000, 300, 1237.5));
+	environmentObjectsPositions.push_back(vec3(5000, 300, 2000));
+
+	environmentObjectIndices.push_back(8);
+	environmentObjectRotations.push_back(180);
+	environmentObjectsPositions.push_back(vec3(5000, 300, 2100));
 
 	environmentObjectIndices.push_back(9);
 	environmentObjectRotations.push_back(0);
-	environmentObjectsPositions.push_back(vec3(3000, 300, 1037.5));
+	environmentObjectsPositions.push_back(vec3(5000, 300, 1700));
+	environmentObjectIndices.push_back(9);
+	environmentObjectRotations.push_back(0);
+	environmentObjectsPositions.push_back(vec3(5000, 300, 1650));
+	environmentObjectIndices.push_back(9);
+	environmentObjectRotations.push_back(0);
+	environmentObjectsPositions.push_back(vec3(5000, 300, 1600));
 
 	for(int i=0; i<300; i++){
-		float tmpTreeX = rand() % 5000 - 3000;
-		float tmpTreeZ = rand() % 2237 - 1200;
+		float tmpTreeX = rand() % 11000 - 6000;
+		float tmpTreeZ = rand() % 2400 + 37.5;
 		float tmpTreeY = 300;
 
 		environmentObjectIndices.push_back(10);
