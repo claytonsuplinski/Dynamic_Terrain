@@ -23,6 +23,7 @@ bool TerrainManager::Initialize()
 	plains = new Plains();
 	mountains = new Mountains();
 	bigCity = new BigCity();
+	bridge = new Bridge();
 
 	city->environmentObject = environmentObject;
 	forest->environmentObject = environmentObject;
@@ -36,6 +37,7 @@ bool TerrainManager::Initialize()
 	plains->Initialize();
 	mountains->Initialize();
 	bigCity->Initialize();
+	bridge->Initialize();
 
 	if (this->GLReturnedError("TerrainManager::Initialize - on exit"))
 		return false;
@@ -51,6 +53,7 @@ desert->TakeDown();
 plains->TakeDown();
 mountains->TakeDown();
 bigCity->TakeDown();
+bridge->TakeDown();
 }
 
 void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 & size, const float time){
@@ -66,6 +69,16 @@ void TerrainManager::Draw(const mat4 & projection, mat4 modelview, const ivec2 &
 	city->userPosition = userPosition * vec3(-1, 1, -1);
 	city->userRotation = userRotation;
 	city->Draw(projection, modelview, size, time);
+	}
+
+	if(userPosition.x > -14238 && userPosition.z > -15539){
+	mat4 bridgeOffset = modelview;
+	bridge->userPosition = userPosition * vec3(-1, 1, -1) - vec3(14241,0,4389);
+	bridge->userRotation = userRotation;
+	bridgeOffset = translate(bridgeOffset, vec3(6660,0,138));
+	bridge->Draw(projection, bridgeOffset, size, 0);
+	bridgeOffset = translate(bridgeOffset, vec3(0,0,6912));
+	bridge->Draw(projection, bridgeOffset, size, 0);
 	}
 
 	if(userPosition.x < -5238 && userPosition.z > -14573){

@@ -137,6 +137,9 @@
     <ClInclude Include="bigCity.h">
       <Filter>Environments</Filter>
     </ClInclude>
+    <ClInclude Include="bridge.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fbo.cpp">
@@ -252,6 +255,9 @@
       <Filter>Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="bigCity.cpp">
+      <Filter>Environments</Filter>
+    </ClCompile>
+    <ClCompile Include="bridge.cpp">
       <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>

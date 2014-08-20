@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bigCity.h" />
+    <ClInclude Include="bridge.h" />
     <ClInclude Include="building.h" />
     <ClInclude Include="city.h" />
     <ClInclude Include="cube.h" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bigCity.cpp" />
+    <ClCompile Include="bridge.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="city.cpp" />
     <ClCompile Include="cube.cpp" />

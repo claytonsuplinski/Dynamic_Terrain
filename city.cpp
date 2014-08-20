@@ -24,8 +24,6 @@ bool City::Initialize()
 
 	buildingsInitialized = false;
 
-	loadBuildings();
-
 	water = new Gengar();
 	water->order = 1;
 	water->Initialize("./models/water.obj", "./textures/water.png", "basic_texture_shader.vert", "basic_texture_shader_ocean.frag");
@@ -749,19 +747,4 @@ bool CCW(vec2 C, vec2 W1, vec2 W2){
 
 bool City::linesIntersect(vec2 a1, vec2 a2, vec2 b1, vec2 b2){
 	return (CCW(a1, b1, b2) != CCW(a2, b1, b2)) && (CCW(b1, a1, a2) != CCW(b2, a1, a2));
-}
-
-
-void City::loadBuildings(){
-cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6660, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7260, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8334, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9408, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10482, 0, 138));cityBlocksBuildingsRotations.push_back(0);
-
-cityBlocksBuildings.push_back(0);cityBlocksBuildingsPositions.push_back(vec3(6660, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(7260, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(8334, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(9408, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
-cityBlocksBuildings.push_back(1);cityBlocksBuildingsPositions.push_back(vec3(10482, 0, 7050));cityBlocksBuildingsRotations.push_back(0);
 }

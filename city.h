@@ -23,7 +23,6 @@ public:
 	virtual void Draw(const mat4& projection, mat4 modelview, const ivec2 & size, const float time = 0);
 	void saveBuildingVertices();
 	void TakeDown();
-	void loadBuildings();
 
 	float sign(vec2 p1, vec2 p2, vec2 p3);
 	bool PointInTriangle(vec2 pt, vec2 v1, vec2 v2, vec2 v3);
@@ -76,15 +75,6 @@ public:
 	vec3 userPosition;float userRotation;
 
 	bool inWater;
-
-	//Need to have terrain separate from buildings	
-
-	//Steps
-	//1) Make entire city in 3ds max (terrain and buildings)
-	//2) Sub-divide city into chunks
-	//3) Make two models for each chunk - one for terrain (cityBlocks) and one for buildings (cityBlocksBuildings)
-
-	//Have a different class for movable objects
 
 private:
 	typedef Object super;

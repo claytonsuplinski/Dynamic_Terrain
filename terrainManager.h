@@ -13,6 +13,7 @@ Project: First-Person Shooter
 #include "mountains.h"
 #include "bigCity.h"
 #include "environmentObject.h"
+#include "bridge.h"
 
 using namespace std;
 using namespace glm;
@@ -32,6 +33,7 @@ public:
 	Plains * plains;
 	Mountains * mountains;
 	BigCity * bigCity;
+	Bridge * bridge;
 
 	EnvironmentObject * environmentObject;
 

@@ -1,19 +1,16 @@
-﻿Build started 8/18/2014 8:05:31 PM.
+﻿Build started 8/20/2014 2:16:53 PM.
      1>Project "C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Adventure\Adventure.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Adventure.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt mountains.cpp
-         mountains.cpp
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\mountains.cpp(48): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\mountains.cpp(49): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\mountains.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\csuplinski\documents\visual studio 2010\projects\adventure\adventure\mountains.cpp(80): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Common Files\\" /I"C:\Program Files (x86)\Common Files\freeglut\include" /I"C:\Program Files (x86)\Common Files\glm" /I"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\include" /I"C:\Program Files (x86)\Common Files\FreeImage\Source" /I"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt terrainManager.cpp
+         terrainManager.cpp
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Common Files\ft2411\freetype-2.4.11\objs" /LIBPATH:"C:\Program Files (x86)\Common Files\glew\glew-1.9.0\lib" /LIBPATH:"C:\Program Files (x86)\Common Files\FreeImage\Source\FreeImageLib" /LIBPATH:"C:\Program Files (x86)\Common Files\freeglut\lib" freetype2411_D.lib glew32.lib FreeImage.lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Adventure.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\csuplinski\documents\visual studio 2010\Projects\Adventure\Debug\Adventure.lib" /MACHINE:X86 Debug\Adventure.exe.embed.manifest.res
          Debug\bigCity.obj
+         Debug\bridge.obj
          Debug\building.obj
          Debug\city.obj
          Debug\cube.obj
@@ -65,4 +62,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.31
+Time Elapsed 00:00:01.91
